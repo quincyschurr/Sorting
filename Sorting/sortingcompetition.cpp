@@ -49,3 +49,39 @@ SortingCompetition::~SortingCompetition()
 {
 
 }
+//quick sort with integers
+void SortingCompetition::quickSort(int *& num, int left, int right)
+{
+    if ( left < right )
+    {
+        int mid = SortingCompetition::partition(num, left, right);
+        quickSort(num, left, mid-1);
+        quickSort(num, mid+1, right);
+    }
+}
+//partition for interger quickSort
+int SortingCompetition::partition(int * &num, int left, int right)
+{
+    int pivot = num[right];
+
+    while ( left < right )
+    {
+        while ( num[left] < pivot )
+            left++;
+
+        while ( num[right] > pivot )
+            right--;
+
+        if ( num[left] == num[right] )
+            left++;
+        else if ( left < right )
+        {
+            int temp = num[left];
+            num[left] = num[right];
+            num[right] = temp;
+        }
+    }
+
+    return right;
+
+}

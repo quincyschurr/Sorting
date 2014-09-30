@@ -19,6 +19,8 @@ public:
     bool readData();
     void setFileName(const string& inputFileName);
     void sortData();
+    void quickSort(int*&, int, int);
+    int partition(int*&, int, int);
 
     SortingCompetition();
     SortingCompetition(const string& inputFileName);
