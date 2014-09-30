@@ -12,7 +12,7 @@ SortingCompetition::SortingCompetition()
 
 SortingCompetition::SortingCompetition(const string &inputFileName)
 {
-
+    this->inputFileName = inputFileName;
 }
 
 void SortingCompetition::outputData(const string& outputFileName)

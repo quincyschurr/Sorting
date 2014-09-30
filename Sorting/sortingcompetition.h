@@ -10,6 +10,7 @@ class SortingCompetition
 {
 private:
     vector <string> words;
+    const string inputFileName;
 
 public:
 
