@@ -17,4 +17,5 @@ int main(int argc, char *argv[])
 
     //create a SortingCompetition object
     SortingCompetition sc1;
+
 }
