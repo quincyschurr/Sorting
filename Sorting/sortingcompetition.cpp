@@ -15,12 +15,12 @@ SortingCompetition::SortingCompetition()
 
 SortingCompetition::SortingCompetition(const string &inputFileName)
 {
-    this -> input = inputFileName.c_str();
+    this->input = string(inputFileName);
 }
 
 string SortingCompetition::getFileName()
 {
-    return input;
+    return this->input;
 }
 
 void SortingCompetition::outputData(const string& outputFileName)
@@ -36,7 +36,7 @@ bool SortingCompetition::prepareData()
 
 bool SortingCompetition::readData()
 {
-    ifstream fin(getFileName());//add a file to read in
+    ifstream fin(this->input.c_str());//add a file to read in
     string parse;
 
     if(!fin)
