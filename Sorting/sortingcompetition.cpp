@@ -194,7 +194,7 @@ int SortingCompetition::partitionLength(char ** &words, int left, int right)
 }
 
 //alphabetical quicksort
-void quickSortAlpha(char **& words, int left, int right)
+void SortingCompetition::quickSortAlpha(char **& words, int left, int right)
 {
     if ( left < right )
     {
@@ -204,7 +204,7 @@ void quickSortAlpha(char **& words, int left, int right)
     }
 }
 //partition for alphabetical quickSort
-int partitionAlpha(char ** &words, int left, int right)
+int SortingCompetition::partitionAlpha(char**& words, int left, int right)
 {
     char* pivot = words[right];
 

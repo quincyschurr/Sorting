@@ -29,11 +29,7 @@ public:
     bool readData();
     void setFileName(const string& inputFileName);
     void sortData();
-/*<<<<<<< HEAD
-    void quickSortLength(int*&, int, int);
-    int partition(int*&, int, int);
-=======
->>>>>>> 8f249ee491f78d1810ffa4966a7c67d1a5a2d471*/
+
 
     SortingCompetition();
     SortingCompetition(const string& inputFileName);
