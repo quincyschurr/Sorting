@@ -16,8 +16,10 @@ private:
     vector <string> words;
     string input;
 
-    void quickSort(int*&, int, int);
-    int partition(int*&, int, int);
+    void quickSortLength(char**&, int, int);
+    int partitionLength(char**&, int, int);
+    void quickSortAlpha(char**&, int, int);
+    int partitionAlpha(char**&, int, int);
     string getFileName();
 
 public:
@@ -27,6 +29,11 @@ public:
     bool readData();
     void setFileName(const string& inputFileName);
     void sortData();
+/*<<<<<<< HEAD
+    void quickSortLength(int*&, int, int);
+    int partition(int*&, int, int);
+=======
+>>>>>>> 8f249ee491f78d1810ffa4966a7c67d1a5a2d471*/
 
     SortingCompetition();
     SortingCompetition(const string& inputFileName);

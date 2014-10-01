@@ -36,7 +36,11 @@ bool SortingCompetition::prepareData()
 
 bool SortingCompetition::readData()
 {
+<<<<<<< HEAD
     ifstream fin(this->input.c_str());//add a file to read in
+=======
+    ifstream fin(input, ios::in);//add a file to read in
+>>>>>>> c97c399a1dc72d19e8a296d90f9b454c8f64d4d5
     string parse;
 
     if(!fin)
@@ -157,35 +161,74 @@ SortingCompetition::~SortingCompetition()
 
 }
 //quick sort with integers
-void SortingCompetition::quickSort(int *& num, int left, int right)
+void SortingCompetition::quickSortLength(char **& words, int left, int right)
 {
     if ( left < right )
     {
-        int mid = SortingCompetition::partition(num, left, right);
-        quickSort(num, left, mid-1);
-        quickSort(num, mid+1, right);
+        int mid = SortingCompetition::partitionLength(words, left, right);
+        quickSortLength(words, left, mid-1);
+        quickSortLength(words, mid+1, right);
     }
 }
 //partition for interger quickSort
-int SortingCompetition::partition(int * &num, int left, int right)
+int SortingCompetition::partitionLength(char ** &words, int left, int right)
 {
-    int pivot = num[right];
+    int pivot = strlen(words[right]);
 
     while ( left < right )
     {
-        while ( num[left] < pivot )
+        while ( strlen(words[left]) < pivot )
             left++;
 
-        while ( num[right] > pivot )
+        while ( strlen(words[right]) > pivot )
             right--;
 
-        if ( num[left] == num[right] )
+        if ( strlen(words[left]) == strlen(words[right]) )
             left++;
         else if ( left < right )
         {
-            int temp = num[left];
-            num[left] = num[right];
-            num[right] = temp;
+            char* temp = words[left];
+            words[left] = words[right];
+            words[right] = temp;
+        }
+    }
+
+    return right;
+}
+
+//alphabetical quicksort
+void quickSortAlpha(char **& words, int left, int right)
+{
+    if ( left < right )
+    {
+        int mid = partitionAlpha(words, left, right);
+        quickSortAlpha(words, left, mid-1);
+        quickSortAlpha(words, mid+1, right);
+    }
+}
+//partition for alphabetical quickSort
+int partitionAlpha(char ** &words, int left, int right)
+{
+    char* pivot = words[right];
+
+    while ( left < right )
+    {
+        //while ( words[left] < pivot )
+        while(strcmp(words[left], pivot) <= -1)
+            left++;
+
+        //while ( words[right] > pivot )
+        while(strcmp(words[right], pivot) >= 1)
+            right--;
+
+        //if ( strlen(words[left] == strlen(words[right]) )
+        if(strcmp(words[left], words[right]) == 0)
+            left++;
+        else if ( left < right )
+        {
+            char* temp = words[left];
+            words[left] = words[right];
+            words[right] = temp;
         }
     }
 
