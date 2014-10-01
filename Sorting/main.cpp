@@ -19,7 +19,9 @@ int main(int argc, char *argv[])
     //create a SortingCompetition object
     SortingCompetition sc1(argv[1]);
     sc1.setFileName(argv[1]);
-
+    sc1.readData();
+    sc1.prepareData();
+    sc1.sortData();
     sc1.outputData(argv[2]);
 
 }

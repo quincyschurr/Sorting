@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <istream>
 
 using namespace std;
 
@@ -14,7 +15,12 @@ SortingCompetition::SortingCompetition()
 
 SortingCompetition::SortingCompetition(const string &inputFileName)
 {
-    this -> inputFileName = inputFileName.c_str();
+    this -> input = inputFileName.c_str();
+}
+
+string SortingCompetition::getFileName()
+{
+    return input;
 }
 
 void SortingCompetition::outputData(const string& outputFileName)
@@ -30,8 +36,7 @@ bool SortingCompetition::prepareData()
 
 bool SortingCompetition::readData()
 {
-    ifstream fin(inputFileName);//add a file to read in
-
+    ifstream fin(getFileName());//add a file to read in
     string parse;
 
     if(!fin)
@@ -134,8 +139,7 @@ bool SortingCompetition::readData()
 
 void SortingCompetition::setFileName(const string& inputFileName)
 {
-    inputFileName = inputFileName;
-
+    input = inputFileName.c_str();
 }
 
 void SortingCompetition::sortData()
