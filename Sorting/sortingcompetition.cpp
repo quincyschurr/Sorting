@@ -36,11 +36,8 @@ bool SortingCompetition::prepareData()
 
 bool SortingCompetition::readData()
 {
-<<<<<<< HEAD
+
     ifstream fin(this->input.c_str());//add a file to read in
-=======
-    ifstream fin(input, ios::in);//add a file to read in
->>>>>>> c97c399a1dc72d19e8a296d90f9b454c8f64d4d5
     string parse;
 
     if(!fin)
