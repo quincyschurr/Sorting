@@ -1,6 +1,9 @@
 #include "sortingcompetition.h"
 #include <iomanip>
 #include <vector>
+#include <iostream>
+#include <fstream>
+#include <istream>
 
 using namespace std;
 
@@ -12,12 +15,18 @@ SortingCompetition::SortingCompetition()
 
 SortingCompetition::SortingCompetition(const string &inputFileName)
 {
-    this->inputFileName = inputFileName;
+    this -> input = inputFileName.c_str();
+}
+
+string SortingCompetition::getFileName()
+{
+    return input;
 }
 
 void SortingCompetition::outputData(const string& outputFileName)
 {
-
+    fstream out(outputFileName.c_str());
+    out << "WE ARE GETTING TO THIS METHOD" << endl;
 }
 
 bool SortingCompetition::prepareData()
@@ -27,12 +36,110 @@ bool SortingCompetition::prepareData()
 
 bool SortingCompetition::readData()
 {
+    ifstream fin(getFileName());//add a file to read in
+    string parse;
+
+    if(!fin)
+    {
+        cerr << "This file could not be opened" << endl;
+        exit(1);
+    }
+
+    while(!fin.eof())
+    {
+        fin >> parse;
+        words.push_back(parse);
+    }
+
+
+    //fin.getline(buffer, 81);
+
+            /*while (1)
+            {
+                if(*buffer == startPage)
+                {
+
+                    memset(buffer, 0, 81 * sizeof(char));
+                    fin.getline(buffer,81);
+
+                    temp = splitWords(buffer, wordSize, amntOfWords, wordActual);
+                    }
+                   }*/
+
+   /* char** splitWords(char* buffer, int size, int& amntOfWords, int& wordActual)
+    {
+        char** builder = new char*[size];
+        int index = 0;
+
+        // Pointer to the last word
+        char* bufferPt = buffer;
+
+        do
+        {
+
+            if(*buffer == '[')
+            {
+
+                buffer++;
+                bufferPt = buffer;
+
+                while(*buffer != ']')
+                {
+                    ++buffer;
+                }
+
+                *(buffer++) = '\0';
+                builder[index] = new char[strlen(bufferPt) + 1];
+                strcpy(builder[index++], bufferPt);
+
+                buffer++; //ignores the space
+
+                bufferPt = buffer;
+            }
+
+            else if(*buffer == ' ')
+            {
+
+                *(buffer++) = '\0';
+
+                builder[index] = new char[strlen(bufferPt) + 1];
+                strcpy(builder[index++], bufferPt);
+
+                bufferPt = buffer;
+
+            }
+
+            else if (*(buffer + 1) == '\0')
+            {
+                ++buffer;
+
+                builder[index] = new char[strlen(bufferPt) + 1];
+                strcpy(builder[index++], bufferPt);
+
+                bufferPt = buffer;
+            }
+
+            else
+            {
+                ++buffer;
+            }
+
+        } while (*buffer != '\0');
+
+        wordActual += index;
+        amntOfWords = index;
+        return builder;
+    }*/
+
+
+
+
 
 }
 
 void SortingCompetition::setFileName(const string& inputFileName)
 {
-
+    input = inputFileName.c_str();
 }
 
 void SortingCompetition::sortData()
@@ -50,35 +157,35 @@ SortingCompetition::~SortingCompetition()
 
 }
 //quick sort with integers
-void SortingCompetition::quickSortLength(int *& num, int left, int right)
+void SortingCompetition::quickSortLength(char **& words, int left, int right)
 {
     if ( left < right )
     {
-        int mid = SortingCompetition::partition(num, left, right);
-        quickSortLength(num, left, mid-1);
-        quickSortLength(num, mid+1, right);
+        int mid = SortingCompetition::partitionLength(words, left, right);
+        quickSortLength(words, left, mid-1);
+        quickSortLength(words, mid+1, right);
     }
 }
 //partition for interger quickSort
-int SortingCompetition::partition(int * &num, int left, int right)
+int SortingCompetition::partitionLength(char ** &words, int left, int right)
 {
-    int pivot = num[right];
+    int pivot = strlen(words[right]);
 
     while ( left < right )
     {
-        while ( num[left] < pivot )
+        while ( strlen(words[left]) < pivot )
             left++;
 
-        while ( num[right] > pivot )
+        while ( strlen(words[right]) > pivot )
             right--;
 
-        if ( num[left] == num[right] )
+        if ( strlen(words[left]) == strlen(words[right]) )
             left++;
         else if ( left < right )
         {
-            int temp = num[left];
-            num[left] = num[right];
-            num[right] = temp;
+            char* temp = words[left];
+            words[left] = words[right];
+            words[right] = temp;
         }
     }
 
