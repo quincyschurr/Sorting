@@ -18,6 +18,8 @@ private:
 
     void quickSortLength(char**&, int, int);
     int partitionLength(char**&, int, int);
+    void quickSortAlpha(char**&, int, int);
+    int partitionAlpha(char**&, int, int);
     string getFileName();
 
 public:
