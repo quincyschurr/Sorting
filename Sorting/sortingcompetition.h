@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstdio>
+#include <cstdlib>
 
 using namespace std;
 
@@ -13,7 +14,7 @@ class SortingCompetition
 {
 private:
     vector <string> words;
-    const string inputFileName;
+    string inputFileName;
 
 public:
 

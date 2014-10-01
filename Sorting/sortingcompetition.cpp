@@ -1,6 +1,8 @@
 #include "sortingcompetition.h"
 #include <iomanip>
 #include <vector>
+#include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -12,12 +14,13 @@ SortingCompetition::SortingCompetition()
 
 SortingCompetition::SortingCompetition(const string &inputFileName)
 {
-
+    this -> inputFileName = inputFileName.c_str();
 }
 
 void SortingCompetition::outputData(const string& outputFileName)
 {
-
+    fstream out(outputFileName.c_str());
+    out << "WE ARE GETTING TO THIS METHOD" << endl;
 }
 
 bool SortingCompetition::prepareData()
@@ -27,7 +30,7 @@ bool SortingCompetition::prepareData()
 
 bool SortingCompetition::readData()
 {
-    ifstream fin();//add a file to read in
+    ifstream fin(inputFileName);//add a file to read in
 
     string parse;
 
@@ -44,7 +47,7 @@ bool SortingCompetition::readData()
     }
 
 
-    fin.getline(buffer, 81);
+    //fin.getline(buffer, 81);
 
             /*while (1)
             {
@@ -131,7 +134,7 @@ bool SortingCompetition::readData()
 
 void SortingCompetition::setFileName(const string& inputFileName)
 {
-
+    inputFileName = inputFileName;
 
 }
 
