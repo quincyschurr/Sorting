@@ -50,13 +50,13 @@ SortingCompetition::~SortingCompetition()
 
 }
 //quick sort with integers
-void SortingCompetition::quickSort(int *& num, int left, int right)
+void SortingCompetition::quickSortLength(int *& num, int left, int right)
 {
     if ( left < right )
     {
         int mid = SortingCompetition::partition(num, left, right);
-        quickSort(num, left, mid-1);
-        quickSort(num, mid+1, right);
+        quickSortLength(num, left, mid-1);
+        quickSortLength(num, mid+1, right);
     }
 }
 //partition for interger quickSort
