@@ -39,6 +39,14 @@ void SortingCompetition::outputData(const string& outputFileName)
 bool SortingCompetition::prepareData()
 {
 
+    for(int j = 0; j < words.size(); j++)
+    {
+        wordsCopy.push_back(words[j]);
+    }
+
+
+    return true;
+
 }
 
 bool SortingCompetition::readData()
@@ -46,7 +54,6 @@ bool SortingCompetition::readData()
 
     string temporary;
     char* buffer;
-
 
     ifstream fin(this->input.c_str());//add a file to read in
 
@@ -70,6 +77,8 @@ bool SortingCompetition::readData()
         words.push_back(buffer);
     }
 
+    return true;
+
 }
 
 void SortingCompetition::setFileName(const string& inputFileName)
@@ -80,17 +89,19 @@ void SortingCompetition::setFileName(const string& inputFileName)
 
 void SortingCompetition::sortData()
 {
-    //I think we should use a median as a pivot
-    //so we can just a common word with a letter that starts
-    //in the middle of the alphabet like L or M
-    //so a word like "land" "last" "love" "made" or "man"
-    //and average word length is 5
+
+    //Just call in order of what we need sorted
+
+    int left;
+    int right;
+
+
 
 }
 
 
 //quick sort with integers
-void SortingCompetition::quickSortLength(char **& words, int left, int right)
+void SortingCompetition::quickSortLength(vector<char*>& words, int left, int right)
 {
     if ( left < right )
     {
@@ -100,7 +111,7 @@ void SortingCompetition::quickSortLength(char **& words, int left, int right)
     }
 }
 //partition for interger quickSort
-int SortingCompetition::partitionLength(char ** &words, int left, int right)
+int SortingCompetition::partitionLength(vector<char*>& words, int left, int right)
 {
     int pivot = strlen(words[right]);
 
@@ -126,7 +137,7 @@ int SortingCompetition::partitionLength(char ** &words, int left, int right)
 }
 
 //alphabetical quicksort
-void SortingCompetition::quickSortAlpha(char **& words, int left, int right)
+void SortingCompetition::quickSortAlpha(vector<char*>& words, int left, int right)
 {
     if ( left < right )
     {
@@ -136,7 +147,7 @@ void SortingCompetition::quickSortAlpha(char **& words, int left, int right)
     }
 }
 //partition for alphabetical quickSort
-int SortingCompetition::partitionAlpha(char**& words, int left, int right)
+int SortingCompetition::partitionAlpha(vector<char*>& words, int left, int right)
 {
     char* pivot = words[right];
 
