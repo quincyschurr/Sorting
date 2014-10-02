@@ -39,13 +39,12 @@ void SortingCompetition::outputData(const string& outputFileName)
 bool SortingCompetition::prepareData()
 {
 
+    cout << "This is executing in prepareData " << endl;
+
     for(int j = 0; j < words.size(); j++)
     {
         wordsCopy.push_back(words[j]);
     }
-
-
-    return true;
 
 }
 
@@ -77,13 +76,13 @@ bool SortingCompetition::readData()
         words.push_back(buffer);
     }
 
-    return true;
 
 }
 
 void SortingCompetition::setFileName(const string& inputFileName)
 {
     input = inputFileName.c_str();
+    cout << "This is executing in setFileName" << endl;
 
 }
 
@@ -94,9 +93,6 @@ void SortingCompetition::sortData()
 
     int left;
     int right;
-
-
-
 }
 
 
