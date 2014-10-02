@@ -1,3 +1,9 @@
+/*
+    Authors:
+        Jake Osselaer & Quincy Schurr
+ */
+
+
 #ifndef SORTINGCOMPETITION_H
 #define SORTINGCOMPETITION_H
 
@@ -13,8 +19,10 @@ using namespace std;
 class SortingCompetition
 {
 private:
-    vector <string> words;
+
+    vector <char*> words;
     string input;
+
 
     void quickSortLength(char**&, int, int);
     int partitionLength(char**&, int, int);

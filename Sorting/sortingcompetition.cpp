@@ -1,3 +1,10 @@
+/*
+    Authors:
+        Jake Osselaer & Quincy Schurr
+ */
+
+
+
 #include "sortingcompetition.h"
 #include <iomanip>
 #include <vector>
@@ -37,8 +44,11 @@ bool SortingCompetition::prepareData()
 bool SortingCompetition::readData()
 {
 
+    string temporary;
+    char* buffer;
+
+
     ifstream fin(this->input.c_str());//add a file to read in
-    string parse;
 
     if(!fin)
     {
@@ -48,99 +58,24 @@ bool SortingCompetition::readData()
 
     while(!fin.eof())
     {
-        fin >> parse;
-        words.push_back(parse);
-    }
+        fin >> temporary;
+        buffer = new char[temporary.length()];
+        memset(buffer, 0, (temporary.length()) * sizeof(char));
 
-
-    //fin.getline(buffer, 81);
-
-            /*while (1)
-            {
-                if(*buffer == startPage)
-                {
-
-                    memset(buffer, 0, 81 * sizeof(char));
-                    fin.getline(buffer,81);
-
-                    temp = splitWords(buffer, wordSize, amntOfWords, wordActual);
-                    }
-                   }*/
-
-   /* char** splitWords(char* buffer, int size, int& amntOfWords, int& wordActual)
-    {
-        char** builder = new char*[size];
-        int index = 0;
-
-        // Pointer to the last word
-        char* bufferPt = buffer;
-
-        do
+        for(int i = 0; i < temporary.length(); i++)
         {
+            buffer[i] = temporary[i];
+        }
 
-            if(*buffer == '[')
-            {
-
-                buffer++;
-                bufferPt = buffer;
-
-                while(*buffer != ']')
-                {
-                    ++buffer;
-                }
-
-                *(buffer++) = '\0';
-                builder[index] = new char[strlen(bufferPt) + 1];
-                strcpy(builder[index++], bufferPt);
-
-                buffer++; //ignores the space
-
-                bufferPt = buffer;
-            }
-
-            else if(*buffer == ' ')
-            {
-
-                *(buffer++) = '\0';
-
-                builder[index] = new char[strlen(bufferPt) + 1];
-                strcpy(builder[index++], bufferPt);
-
-                bufferPt = buffer;
-
-            }
-
-            else if (*(buffer + 1) == '\0')
-            {
-                ++buffer;
-
-                builder[index] = new char[strlen(bufferPt) + 1];
-                strcpy(builder[index++], bufferPt);
-
-                bufferPt = buffer;
-            }
-
-            else
-            {
-                ++buffer;
-            }
-
-        } while (*buffer != '\0');
-
-        wordActual += index;
-        amntOfWords = index;
-        return builder;
-    }*/
-
-
-
-
+        words.push_back(buffer);
+    }
 
 }
 
 void SortingCompetition::setFileName(const string& inputFileName)
 {
     input = inputFileName.c_str();
+
 }
 
 void SortingCompetition::sortData()
@@ -153,10 +88,7 @@ void SortingCompetition::sortData()
 
 }
 
-SortingCompetition::~SortingCompetition()
-{
 
-}
 //quick sort with integers
 void SortingCompetition::quickSortLength(char **& words, int left, int right)
 {
@@ -230,5 +162,10 @@ int SortingCompetition::partitionAlpha(char**& words, int left, int right)
     }
 
     return right;
+
+}
+
+SortingCompetition::~SortingCompetition()
+{
 
 }

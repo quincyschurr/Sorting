@@ -1,3 +1,8 @@
+/*
+    Authors:
+        Jake Osselaer & Quincy Schurr
+ */
+
 #include "sortingcompetition.h"
 #include <iomanip>
 #include <cstdlib>
@@ -14,7 +19,6 @@ int main(int argc, char *argv[])
         cerr << "Expected arguments are ./a.out <input file> <output file>" << endl;
         return 1;
     }
-    return 0;
 
     //create a SortingCompetition object
     SortingCompetition sc1(argv[1]);
@@ -23,5 +27,7 @@ int main(int argc, char *argv[])
     sc1.prepareData();
     sc1.sortData();
     sc1.outputData(argv[2]);
+
+    return 0;
 
 }
