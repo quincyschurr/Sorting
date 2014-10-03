@@ -20,15 +20,19 @@ class SortingCompetition
 {
 private:
 
-    vector <char*> words;
-    vector <char*> wordsCopy;
+    vector <char*> wordsVector;
+    char ** words;
+    char** wordsAlpha;
+    char** wordsLength;
+    char** wordsCopy;
     string input;
+    int counter;
 
 
-    void quickSortLength(vector<char*>&, int, int);
-    void quickSortAlpha(vector<char*>&, int, int);
-    int partitionAlpha(vector<char*>&, int, int);
-    int partitionLength(vector<char*>&, int, int);
+    void quickSortLength(char**&, int, int);
+    void quickSortAlpha(char**&, int, int);
+    int partitionAlpha(char**&, int, int);
+    int partitionLength(char**&, int, int);
     string getFileName();
 
 public:

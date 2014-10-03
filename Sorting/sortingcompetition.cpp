@@ -23,6 +23,7 @@ SortingCompetition::SortingCompetition()
 SortingCompetition::SortingCompetition(const string &inputFileName)
 {
     this->input = string(inputFileName);
+    counter = 0;
 }
 
 string SortingCompetition::getFileName()
@@ -34,6 +35,23 @@ void SortingCompetition::outputData(const string& outputFileName)
 {
     fstream out(outputFileName.c_str());
     out << "WE ARE GETTING TO THIS METHOD" << endl;
+
+    out << "Prints sorted by length" << endl;
+    for(int i = 0; i < counter; i++) {
+        out << wordsLength[i] << " ";
+    }
+    out << endl << endl;
+
+    out << "Prints sorted by ASCII" << endl;
+    for(int i = 0; i < counter; i++) {
+        out << wordsAlpha[i] << " "
+    }
+
+    delete words;
+    delete wordsAlpha;
+    delete wordsLength;
+    delete wordsCopy;
+    delete wordsVector;
 }
 
 bool SortingCompetition::prepareData()
@@ -41,16 +59,17 @@ bool SortingCompetition::prepareData()
 
     cout << "This is executing in prepareData " << endl;
 
-    for(int j = 0; j < words.size(); j++)
+    for(int j = 0; j < counter; j++)
     {
-        wordsCopy.push_back(words[j]);
+        wordsCopy[j] = words[j];
+        wordsAlpha[j] = words[j];
+        wordsLength[j] = words[j];
     }
 
 }
 
 bool SortingCompetition::readData()
 {
-
     string temporary;
     char* buffer;
 
@@ -73,9 +92,14 @@ bool SortingCompetition::readData()
             buffer[i] = temporary[i];
         }
 
-        words.push_back(buffer);
+        wordsVector.push_back(buffer);
+        counter++;
     }
+    words = new char*[counter];
 
+    for(int i = 0; i < counter; i++) {
+        words[i] = wordsVector[i];
+    }
 
 }
 
@@ -91,41 +115,45 @@ void SortingCompetition::sortData()
 
     //Just call in order of what we need sorted
 
-    int left;
-    int right;
+    int left = 0;
+    int right = counter;
+
+    quickSortLength(wordsLength, left, right);
+    quickSortAlpha(wordsAlpha, left, right);
+
 }
 
-
+//maybe use char* with prefix
 //quick sort with integers
-void SortingCompetition::quickSortLength(vector<char*>& words, int left, int right)
+void SortingCompetition::quickSortLength(char**& wordsLength, int left, int right)
 {
     if ( left < right )
     {
-        int mid = SortingCompetition::partitionLength(words, left, right);
-        quickSortLength(words, left, mid-1);
-        quickSortLength(words, mid+1, right);
+        int mid = SortingCompetition::partitionLength(wordsLength, left, right);
+        quickSortLength(wordsLenght, left, mid-1);
+        quickSortLength(wordsLength, mid+1, right);
     }
 }
 //partition for interger quickSort
-int SortingCompetition::partitionLength(vector<char*>& words, int left, int right)
+int SortingCompetition::partitionLength(char**& wordsLength, int left, int right)
 {
-    int pivot = strlen(words[right]);
+    int pivot = strlen(wordsLength[right]);
 
     while ( left < right )
     {
-        while ( strlen(words[left]) < pivot )
+        while ( strlen(wordsLength[left]) < pivot )
             left++;
 
-        while ( strlen(words[right]) > pivot )
+        while ( strlen(wordsLength[right]) > pivot )
             right--;
 
-        if ( strlen(words[left]) == strlen(words[right]) )
+        if ( strlen(wordsLength[left]) == strlen(words[right]) )
             left++;
         else if ( left < right )
         {
-            char* temp = words[left];
-            words[left] = words[right];
-            words[right] = temp;
+            char* temp = wordsLength[left];
+            wordsLength[left] = wordsLength[right];
+            wordsLength[right] = temp;
         }
     }
 
@@ -133,38 +161,38 @@ int SortingCompetition::partitionLength(vector<char*>& words, int left, int righ
 }
 
 //alphabetical quicksort
-void SortingCompetition::quickSortAlpha(vector<char*>& words, int left, int right)
+void SortingCompetition::quickSortAlpha(char**& wordsAlpha, int left, int right)
 {
     if ( left < right )
     {
-        int mid = partitionAlpha(words, left, right);
-        quickSortAlpha(words, left, mid-1);
-        quickSortAlpha(words, mid+1, right);
+        int mid = partitionAlpha(wordsAlpha, left, right);
+        quickSortAlpha(wordsAlpha, left, mid-1);
+        quickSortAlpha(wordsAlpha, mid+1, right);
     }
 }
 //partition for alphabetical quickSort
-int SortingCompetition::partitionAlpha(vector<char*>& words, int left, int right)
+int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
 {
-    char* pivot = words[right];
+    char* pivot = wordsAlpha[right];
 
     while ( left < right )
     {
-        //while ( words[left] < pivot )
-        while(strcmp(words[left], pivot) <= -1)
+        //while ( wordsAlpha[left] < pivot )
+        while(strcmp(wordsAlpha[left], pivot) <= -1)
             left++;
 
-        //while ( words[right] > pivot )
-        while(strcmp(words[right], pivot) >= 1)
+        //while ( wordsAlpha[right] > pivot )
+        while(strcmp(wordsAlpha[right], pivot) >= 1)
             right--;
 
-        //if ( strlen(words[left] == strlen(words[right]) )
-        if(strcmp(words[left], words[right]) == 0)
+        //if ( strlen(wordsAlpha[left] == strlen(wordsAlpha[right]) )
+        if(strcmp(wordsAlpha[left], wordsAlpha[right]) == 0)
             left++;
         else if ( left < right )
         {
-            char* temp = words[left];
-            words[left] = words[right];
-            words[right] = temp;
+            char* temp = wordsAlpha[left];
+            wordsAlpha[left] = wordsAlpha[right];
+            wordsAlpha[right] = temp;
         }
     }
 
