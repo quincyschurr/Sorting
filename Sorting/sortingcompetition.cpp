@@ -44,14 +44,14 @@ void SortingCompetition::outputData(const string& outputFileName)
 
     out << "Prints sorted by ASCII" << endl;
     for(int i = 0; i < counter; i++) {
-        out << wordsAlpha[i] << " "
+        out << wordsAlpha[i] << " ";
     }
 
     delete words;
     delete wordsAlpha;
     delete wordsLength;
     delete wordsCopy;
-    delete wordsVector;
+    //delete wordsVector;
 }
 
 bool SortingCompetition::prepareData()
@@ -61,6 +61,7 @@ bool SortingCompetition::prepareData()
 
     for(int j = 0; j < counter; j++)
     {
+        //this is not actually copying!!!
         wordsCopy[j] = words[j];
         wordsAlpha[j] = words[j];
         wordsLength[j] = words[j];
@@ -70,6 +71,8 @@ bool SortingCompetition::prepareData()
 
 bool SortingCompetition::readData()
 {
+    cout << "This is the beginning of readData" << endl;
+
     string temporary;
     char* buffer;
 
@@ -97,10 +100,12 @@ bool SortingCompetition::readData()
     }
     words = new char*[counter];
 
-    for(int i = 0; i < counter; i++) {
+    for(int i = 0; i < counter; i++)
+    {
         words[i] = wordsVector[i];
     }
 
+    cout << "This is the end of readData" <<endl;
 }
 
 void SortingCompetition::setFileName(const string& inputFileName)
@@ -112,6 +117,7 @@ void SortingCompetition::setFileName(const string& inputFileName)
 
 void SortingCompetition::sortData()
 {
+    cout << "This is executing in sortData" << endl;
 
     //Just call in order of what we need sorted
 
@@ -130,7 +136,7 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
     if ( left < right )
     {
         int mid = SortingCompetition::partitionLength(wordsLength, left, right);
-        quickSortLength(wordsLenght, left, mid-1);
+        quickSortLength(wordsLength, left, mid-1);
         quickSortLength(wordsLength, mid+1, right);
     }
 }
