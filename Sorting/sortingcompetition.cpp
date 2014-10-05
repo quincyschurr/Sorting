@@ -75,8 +75,10 @@ bool SortingCompetition::readData()
 {
     cout << "This is the beginning of readData" << endl;
 
-    string temporary;
-    char* buffer;
+    char* temporary;
+    //char* buffer;
+
+   // wordsVector = new vector<char*>(100);
 
     ifstream fin(this->input.c_str());//add a file to read in
 
@@ -86,7 +88,9 @@ bool SortingCompetition::readData()
         exit(1);
     }
 
-    while(!fin.eof())
+
+
+    /*while(!fin.eof())
     {
         fin >> temporary;
         buffer = new char[temporary.length()];
@@ -101,7 +105,16 @@ bool SortingCompetition::readData()
 
         wordsVector.push_back(buffer);
         counter++;
+    }*/
+    counter = 0;
+    while(!fin.eof()) {
+        temporary = new char[100];
+        fin >> temporary;
+
+        wordsVector.push_back(temporary);
+        counter++;
     }
+
     words = new char*[counter];
 
     for(int i = 0; i < counter; i++)
@@ -140,7 +153,8 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
 {
     if ( left < right )
     {
-        int mid = partitionLength(wordsLength, left, right);
+        int mid = 0;
+        mid = partitionLength(wordsLength, left, right);
         quickSortLength(wordsLength, left, mid-1);
         quickSortLength(wordsLength, mid+1, right);
     }
@@ -149,7 +163,7 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
 int SortingCompetition::partitionLength(char**& wordsLength, int left, int right)
 {
     //DEBUGGER IS STOPPING HERE!
-    int pivot = strlen(wordsLength[right]);
+    int pivot = strlen(wordsLength[left]);
 
     while ( left < right )
     {
