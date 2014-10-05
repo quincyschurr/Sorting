@@ -34,7 +34,7 @@ string SortingCompetition::getFileName()
 void SortingCompetition::outputData(const string& outputFileName)
 {
     fstream out(outputFileName.c_str());
-    out << "WE ARE GETTING TO THIS METHOD" << endl;
+    out << "WE ARE GETTING TO THE OUTPUT METHOD" << endl;
 
     out << "Prints sorted by length" << endl;
     for(int i = 0; i < counter; i++) {
@@ -56,13 +56,14 @@ void SortingCompetition::outputData(const string& outputFileName)
 
 bool SortingCompetition::prepareData()
 {
-
+    wordsCopy = new char*[counter];
+    wordsAlpha = new char*[counter];
+    wordsLength = new char*[counter];
 
     cout << "This is executing in prepareData " << endl;
 
     for(int j = 0; j < counter; j++)
     {
-        //this is not actually copying!!!
         wordsCopy[j] = words[j];
         wordsAlpha[j] = words[j];
         wordsLength[j] = words[j];
@@ -106,6 +107,7 @@ bool SortingCompetition::readData()
     for(int i = 0; i < counter; i++)
     {
         words[i] = wordsVector[i];
+        cout << "WORDS " << words[i] << endl;
     }
 
     cout << "This is the end of readData" <<endl;
@@ -138,7 +140,7 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
 {
     if ( left < right )
     {
-        int mid = SortingCompetition::partitionLength(wordsLength, left, right);
+        int mid = partitionLength(wordsLength, left, right);
         quickSortLength(wordsLength, left, mid-1);
         quickSortLength(wordsLength, mid+1, right);
     }
@@ -146,6 +148,7 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
 //partition for interger quickSort
 int SortingCompetition::partitionLength(char**& wordsLength, int left, int right)
 {
+    //DEBUGGER IS STOPPING HERE!
     int pivot = strlen(wordsLength[right]);
 
     while ( left < right )
