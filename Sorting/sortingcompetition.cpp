@@ -34,7 +34,7 @@ string SortingCompetition::getFileName()
 void SortingCompetition::outputData(const string& outputFileName)
 {
     fstream out(outputFileName.c_str());
-    out << "WE ARE GETTING TO THE OUTPUT METHOD" << endl;
+    cout << "WE ARE GETTING TO THE OUTPUT METHOD" << endl;
 
     out << "Prints sorted by length" << endl;
     for(int i = 0; i < counter; i++) {
@@ -47,11 +47,13 @@ void SortingCompetition::outputData(const string& outputFileName)
         out << wordsAlpha[i] << " ";
     }
 
-    delete words;
-    delete wordsAlpha;
-    delete wordsLength;
-    delete wordsCopy;
-    //delete wordsVector;
+    //we have to go through and do a deep delete as well.
+    //with a for loop
+
+    delete[] words;
+    delete[] wordsAlpha;
+    delete[] wordsLength;
+    delete[] wordsCopy;
 }
 
 bool SortingCompetition::prepareData()
@@ -75,10 +77,8 @@ bool SortingCompetition::readData()
 {
     cout << "This is the beginning of readData" << endl;
 
-    char* temporary;
-    //char* buffer;
-
-   // wordsVector = new vector<char*>(100);
+    string temporary;
+    char* buffer;
 
     ifstream fin(this->input.c_str());//add a file to read in
 
@@ -89,29 +89,17 @@ bool SortingCompetition::readData()
     }
 
 
-
-    /*while(!fin.eof())
+    while(!fin.eof())
     {
         fin >> temporary;
         buffer = new char[temporary.length()];
-        memset(buffer, 0, (temporary.length()) * sizeof(char));
 
-        int temporarySize = temporary.length();
-
-        for(int k = 0; k < temporarySize; k++)
+        for(int k = 0; k < temporary.length(); k++)
         {
             buffer[k] = temporary[k];
         }
 
         wordsVector.push_back(buffer);
-        counter++;
-    }*/
-    counter = 0;
-    while(!fin.eof()) {
-        temporary = new char[100];
-        fin >> temporary;
-
-        wordsVector.push_back(temporary);
         counter++;
     }
 
@@ -162,7 +150,8 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
 //partition for interger quickSort
 int SortingCompetition::partitionLength(char**& wordsLength, int left, int right)
 {
-    //DEBUGGER IS STOPPING HERE!
+    //DEBUGGER IS STOPPING IN THIS LOOP. RUNNING INFINITELY
+    //HAS TO DO WITH THE ASSIGNING OF WORDS.
     int pivot = strlen(wordsLength[left]);
 
     while ( left < right )

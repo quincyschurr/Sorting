@@ -1,0 +1,5 @@
+Prints sorted by length
+characters characters characters characters characters characters characters characters characters characters characters 
+
+Prints sorted by ASCII
+characters characters characters characters characters characters characters characters characters characters characters 
