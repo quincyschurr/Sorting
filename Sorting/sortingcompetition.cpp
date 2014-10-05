@@ -57,6 +57,7 @@ void SortingCompetition::outputData(const string& outputFileName)
 bool SortingCompetition::prepareData()
 {
 
+
     cout << "This is executing in prepareData " << endl;
 
     for(int j = 0; j < counter; j++)
@@ -90,9 +91,11 @@ bool SortingCompetition::readData()
         buffer = new char[temporary.length()];
         memset(buffer, 0, (temporary.length()) * sizeof(char));
 
-        for(int i = 0; i < temporary.length(); i++)
+        int temporarySize = temporary.length();
+
+        for(int k = 0; k < temporarySize; k++)
         {
-            buffer[i] = temporary[i];
+            buffer[k] = temporary[k];
         }
 
         wordsVector.push_back(buffer);
