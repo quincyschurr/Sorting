@@ -33,7 +33,7 @@ string SortingCompetition::getFileName()
 
 void SortingCompetition::outputData(const string& outputFileName)
 {
-    fstream out(outputFileName.c_str());
+    ofstream out(outputFileName.c_str(), ios::out);
     cout << "WE ARE GETTING TO THE OUTPUT METHOD" << endl;
 
     out << "Prints sorted by length" << endl;
@@ -77,7 +77,7 @@ bool SortingCompetition::readData()
 {
     cout << "This is the beginning of readData" << endl;
 
-    string temporary;
+    char* temporary;
     char* buffer;
 
     ifstream fin(this->input.c_str());//add a file to read in
@@ -91,10 +91,11 @@ bool SortingCompetition::readData()
 
     while(!fin.eof())
     {
+        temporary = new char[50];
         fin >> temporary;
-        buffer = new char[temporary.length()];
+        buffer = new char[strlen(temporary)];
 
-        for(int k = 0; k < temporary.length(); k++)
+        for(int k = 0; k < strlen(temporary); k++)
         {
             buffer[k] = temporary[k];
         }
@@ -150,9 +151,9 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
 //partition for interger quickSort
 int SortingCompetition::partitionLength(char**& wordsLength, int left, int right)
 {
-    //DEBUGGER IS STOPPING IN THIS LOOP. RUNNING INFINITELY
-    //HAS TO DO WITH THE ASSIGNING OF WORDS.
-    int pivot = strlen(wordsLength[left]);
+
+    //int pivot = strlen(wordsLength[right]);
+    int pivot = 5;
 
     while ( left < right )
     {
@@ -162,7 +163,7 @@ int SortingCompetition::partitionLength(char**& wordsLength, int left, int right
         while ( strlen(wordsLength[right]) > pivot )
             right--;
 
-        if ( strlen(wordsLength[left]) == strlen(words[right]) )
+        if ( strlen(wordsLength[left]) == strlen(wordsLength[right]) )
             left++;
         else if ( left < right )
         {
