@@ -140,7 +140,7 @@ void SortingCompetition::sortData()
     //Just call in order of what we need sorted
 
     int left = 0;
-    int right = counter;
+    int right = counter - 1;
 
     quickSortLength(wordsLength, left, right);
     quickSortAlpha(wordsAlpha, left, right);
