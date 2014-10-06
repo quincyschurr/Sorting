@@ -33,18 +33,25 @@ string SortingCompetition::getFileName()
 
 void SortingCompetition::outputData(const string& outputFileName)
 {
+<<<<<<< HEAD
     fstream out(outputFileName.c_str(), ios::out);
+=======
+    ofstream out(outputFileName.c_str(), ios::out);
+
+>>>>>>> 69d760d066b9de0db39304db69ce1837b51ce6ba
     cout << "WE ARE GETTING TO THE OUTPUT METHOD" << endl;
 
     out << "Prints sorted by length" << endl;
-    for(int i = 0; i < counter; i++) {
-        out << wordsLength[i] << " ";
+    for(int i = 0; i < counter; i++)
+    {
+        out << wordsLength[i] << endl;
     }
     out << endl << endl;
 
     out << "Prints sorted by ASCII" << endl;
-    for(int i = 0; i < counter; i++) {
-        out << wordsAlpha[i] << " ";
+    for(int i = 0; i < counter; i++)
+    {
+        out << wordsAlpha[i] << endl;
     }
 
     //we have to go through and do a deep delete as well.

@@ -15,12 +15,12 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 
-    /*if(argc != 3)
+    if(argc != 3)
     {
         cerr << "There are not enough files to run this program" << endl;
         cerr << "Expected arguments are ./a.out <input file> <output file>" << endl;
         return 1;
-    }*/
+    }
 
     chrono::time_point<chrono::system_clock> start, end;
 
@@ -28,6 +28,12 @@ int main(int argc, char *argv[])
     //create a SortingCompetition object
     SortingCompetition sc1(argv[1]);
     sc1.setFileName(argv[1]);
+<<<<<<< HEAD
+=======
+
+    //SortingCompetition sc1("test.txt");
+    //sc1.setFileName("test.txt");
+>>>>>>> 69d760d066b9de0db39304db69ce1837b51ce6ba
 
     sc1.readData();
     sc1.prepareData();
@@ -43,7 +49,11 @@ int main(int argc, char *argv[])
 
 
     sc1.outputData(argv[2]);
+<<<<<<< HEAD
 
+=======
+    //sc1.outputData("output.txt");
+>>>>>>> 69d760d066b9de0db39304db69ce1837b51ce6ba
 
 
     return 0;
