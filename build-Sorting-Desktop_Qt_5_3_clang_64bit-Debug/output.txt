@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Prints sorted by length
 
 it
@@ -32,3 +33,6 @@ today
 with
 wording
 words
+=======
+yes
+>>>>>>> b7755026fda7fd16ea606ac14ebef4dc5c9f77bb

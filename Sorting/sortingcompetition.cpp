@@ -33,7 +33,8 @@ string SortingCompetition::getFileName()
 
 void SortingCompetition::outputData(const string& outputFileName)
 {
-    ofstream out(outputFileName.c_str(), ios::out);
+    fstream out(outputFileName.c_str(), ios::out);
+    //ofstream out(outputFileName.c_str(), ios::out);
 
     cout << "WE ARE GETTING TO THE OUTPUT METHOD" << endl;
 
@@ -57,6 +58,9 @@ void SortingCompetition::outputData(const string& outputFileName)
     delete[] wordsAlpha;
     delete[] wordsLength;
     delete[] wordsCopy;
+
+    ofstream fout("output.txt", ios::out);
+    fout << "yes";
 }
 
 bool SortingCompetition::prepareData()
