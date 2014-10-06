@@ -34,17 +34,20 @@ string SortingCompetition::getFileName()
 void SortingCompetition::outputData(const string& outputFileName)
 {
     ofstream out(outputFileName.c_str(), ios::out);
+
     cout << "WE ARE GETTING TO THE OUTPUT METHOD" << endl;
 
     out << "Prints sorted by length" << endl;
-    for(int i = 0; i < counter; i++) {
-        out << wordsLength[i] << " ";
+    for(int i = 0; i < counter; i++)
+    {
+        out << wordsLength[i] << endl;
     }
     out << endl << endl;
 
     out << "Prints sorted by ASCII" << endl;
-    for(int i = 0; i < counter; i++) {
-        out << wordsAlpha[i] << " ";
+    for(int i = 0; i < counter; i++)
+    {
+        out << wordsAlpha[i] << endl;
     }
 
     //we have to go through and do a deep delete as well.
@@ -152,8 +155,7 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
 int SortingCompetition::partitionLength(char**& wordsLength, int left, int right)
 {
 
-    //int pivot = strlen(wordsLength[right]);
-    int pivot = 5;
+    int pivot = strlen(wordsLength[right]);
 
     while ( left < right )
     {
