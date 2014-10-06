@@ -135,6 +135,7 @@ void SortingCompetition::sortData()
     int right = counter - 1;
 
     quickSortLength(wordsLength, left, right);
+    //quickSortAlpha(wordsLength, left, right);
     quickSortAlpha(wordsAlpha, left, right);
 
 }
@@ -177,6 +178,19 @@ int SortingCompetition::partitionLength(char**& wordsLength, int left, int right
 
     return right;
 }
+
+/*void SortingCompetition::quickSortAlpha(char **& wordsLength, int left, int right)
+{
+    int maxWordLength = strlen(wordsLength[right]);
+    int minWordLength = strlen(wordsLength[left]);
+    int lengthCounter = 0;
+
+}
+
+int SortingCompetition::partitionAlpha(char **& wordsLength, int left, int right)
+{
+
+}*/
 
 //alphabetical quicksort
 void SortingCompetition::quickSortAlpha(char**& wordsAlpha, int left, int right)
