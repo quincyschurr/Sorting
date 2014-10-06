@@ -33,7 +33,7 @@ string SortingCompetition::getFileName()
 
 void SortingCompetition::outputData(const string& outputFileName)
 {
-    ofstream out(outputFileName.c_str(), ios::out);
+    fstream out(outputFileName.c_str(), ios::out);
     cout << "WE ARE GETTING TO THE OUTPUT METHOD" << endl;
 
     out << "Prints sorted by length" << endl;
@@ -54,6 +54,9 @@ void SortingCompetition::outputData(const string& outputFileName)
     delete[] wordsAlpha;
     delete[] wordsLength;
     delete[] wordsCopy;
+
+    ofstream fout("output.txt", ios::out);
+    fout << "yes";
 }
 
 bool SortingCompetition::prepareData()
@@ -152,8 +155,7 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
 int SortingCompetition::partitionLength(char**& wordsLength, int left, int right)
 {
 
-    //int pivot = strlen(wordsLength[right]);
-    int pivot = 5;
+    int pivot = strlen(wordsLength[right]);
 
     while ( left < right )
     {
