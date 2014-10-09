@@ -139,7 +139,6 @@ void SortingCompetition::sortData()
     int right = counter - 1;
 
     quickSortLength(wordsLength, left, right);
-    //quickSortAlpha(wordsLength, left, right);
     quickSortAlpha(wordsAlpha, left, right);
 
 }
