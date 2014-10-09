@@ -75,7 +75,16 @@ bool SortingCompetition::prepareData()
     {
         wordsCopy[j] = words[j];
         wordsAlpha[j] = words[j];
-        wordsLength[j] = words[j];
+        //wordsLength[j] = words[j];
+    }
+    //turn wordsLength into prefixed char*
+    //so they can be sorted faster
+    for(int i = 0; i < counter; i++) {
+        wordsLength[i] = new char[strlen(words[i]) + 1];
+        wordsLength[i][0] = strlen(words[i]);
+        for(int j = 1; j <= strlen(words[i]); j++) {
+            wordsLength[i][j] = words[i][j-1];
+        }
     }
 
 }
@@ -160,17 +169,17 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
 int SortingCompetition::partitionLength(char**& wordsLength, int left, int right)
 {
 
-    int pivot = strlen(wordsLength[right]);
+    int pivot = wordsLength[right][0];
 
     while ( left < right )
     {
-        while ( strlen(wordsLength[left]) < pivot )
+        while (wordsLength[left][0] < pivot )
             left++;
 
-        while ( strlen(wordsLength[right]) > pivot )
+        while (wordsLength[right][0] > pivot )
             right--;
 
-        if ( strlen(wordsLength[left]) == strlen(wordsLength[right]) )
+        if (wordsLength[left][0] == wordsLength[right][0])
             left++;
         else if ( left < right )
         {

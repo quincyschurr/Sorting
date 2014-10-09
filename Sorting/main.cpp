@@ -29,13 +29,12 @@ int main(int argc, char *argv[])
     SortingCompetition sc1(argv[1]);
     sc1.setFileName(argv[1]);
 
-<<<<<<< HEAD
-=======
+
 
     //SortingCompetition sc1("test.txt");
     //sc1.setFileName("test.txt");
 
->>>>>>> b7755026fda7fd16ea606ac14ebef4dc5c9f77bb
+
     sc1.readData();
     sc1.prepareData();
 
@@ -49,12 +48,9 @@ int main(int argc, char *argv[])
     cout << "Elapsed time: " << elapsed_seconds.count() << "s\n";
 
     sc1.outputData(argv[2]);
-<<<<<<< HEAD
-=======
+
 
     //sc1.outputData("output.txt");
->>>>>>> b7755026fda7fd16ea606ac14ebef4dc5c9f77bb
-
 
     return 0;
 
