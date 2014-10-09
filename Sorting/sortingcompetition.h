@@ -7,10 +7,12 @@
 #ifndef SORTINGCOMPETITION_H
 #define SORTINGCOMPETITION_H
 
+#include <iomanip>
 #include <string>
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <istream>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>

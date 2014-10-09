@@ -43,7 +43,6 @@ int main(int argc, char *argv[])
 
     sc1.outputData(argv[2]);
 
-
     return 0;
 
 }

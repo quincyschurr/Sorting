@@ -6,11 +6,6 @@
 
 
 #include "sortingcompetition.h"
-#include <iomanip>
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include <istream>
 
 using namespace std;
 
@@ -33,22 +28,22 @@ string SortingCompetition::getFileName()
 
 void SortingCompetition::outputData(const string& outputFileName)
 {
-    fstream out(outputFileName.c_str(), ios::out);
-    //ofstream out(outputFileName.c_str(), ios::out);
+    //fstream out(outputFileName.c_str(), ios::out);
+    ofstream fout("output.txt", ios::out);
 
     cout << "WE ARE GETTING TO THE OUTPUT METHOD" << endl;
 
-    out << "Prints sorted by length" << endl;
+    fout << "Prints sorted by length" << endl;
     for(int i = 0; i < counter; i++)
     {
-        out << wordsLength[i] << endl;
+        fout << wordsLength[i] << endl;
     }
-    out << endl << endl;
+    fout << endl << endl;
 
-    out << "Prints sorted by ASCII" << endl;
+    fout << "Prints sorted by ASCII" << endl;
     for(int i = 0; i < counter; i++)
     {
-        out << wordsAlpha[i] << endl;
+        fout << wordsAlpha[i] << endl;
     }
 
     //we have to go through and do a deep delete as well.
@@ -59,8 +54,7 @@ void SortingCompetition::outputData(const string& outputFileName)
     delete[] wordsLength;
     delete[] wordsCopy;
 
-    ofstream fout("output.txt", ios::out);
-    fout << "yes";
+    fout.close();
 }
 
 bool SortingCompetition::prepareData()
@@ -84,7 +78,7 @@ bool SortingCompetition::readData()
 {
     cout << "This is the beginning of readData" << endl;
 
-    char* temporary;
+    string temporary;
     char* buffer;
 
     ifstream fin(this->input.c_str());//add a file to read in
@@ -98,11 +92,11 @@ bool SortingCompetition::readData()
 
     while(!fin.eof())
     {
-        temporary = new char[50];
         fin >> temporary;
-        buffer = new char[strlen(temporary)];
+        buffer = new char[temporary.length() + 1];
+        memset(buffer, 0, (temporary.length() + 1) * sizeof(char));
 
-        for(int k = 0; k < strlen(temporary); k++)
+        for(int k = 0; k < temporary.length(); k++)
         {
             buffer[k] = temporary[k];
         }
@@ -116,10 +110,10 @@ bool SortingCompetition::readData()
     for(int i = 0; i < counter; i++)
     {
         words[i] = wordsVector[i];
-        cout << "WORDS " << words[i] << endl;
     }
 
     cout << "This is the end of readData" <<endl;
+    fin.close();
 }
 
 void SortingCompetition::setFileName(const string& inputFileName)
@@ -142,11 +136,10 @@ void SortingCompetition::sortData()
     quickSortAlpha(wordsAlpha, left, right);
 
 }
-
-//maybe use char* with prefix
 //quick sort with integers
 void SortingCompetition::quickSortLength(char**& wordsLength, int left, int right)
 {
+    int size = right;
     if ( left < right )
     {
         int mid = 0;
@@ -154,7 +147,45 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
         quickSortLength(wordsLength, left, mid-1);
         quickSortLength(wordsLength, mid+1, right);
     }
+
+    //sorts each length alphabetically
+    int max = strlen(wordsLength[size]);
+    int lengthCount = 0;
+    int startIndex = 0;
+    int endIndex = 0;
+
+    for(int r = 0; r < max; r++)
+    {
+        while(wordsLength[lengthCount][0] == r)
+        {
+            lengthCount++;
+            endIndex++;
+        }
+
+        lengthCount = 0;
+        char** temp = new char*[endIndex+1];
+        for(int j = startIndex; j <= endIndex; j++)
+        {
+            temp[lengthCount] = wordsLength[j];
+            lengthCount++;
+        }
+
+        quickSortAlpha(temp, 0, lengthCount - 1);
+        lengthCount = 0;
+        for(int k = startIndex; k <= endIndex; k++)
+        {
+            wordsLength[k] = temp[lengthCount];
+            lengthCount++;
+        }
+
+        startIndex = endIndex;
+
+        //must do a deep delete
+        delete [] temp;
+    }
+
 }
+
 //partition for interger quickSort
 int SortingCompetition::partitionLength(char**& wordsLength, int left, int right)
 {
@@ -163,14 +194,15 @@ int SortingCompetition::partitionLength(char**& wordsLength, int left, int right
 
     while ( left < right )
     {
-        while ( strlen(wordsLength[left]) < pivot )
+        while (strlen(wordsLength[left]) < pivot )
             left++;
 
-        while ( strlen(wordsLength[right]) > pivot )
+        while (strlen(wordsLength[right]) > pivot )
             right--;
 
-        if ( strlen(wordsLength[left]) == strlen(wordsLength[right]) )
+        if (strlen(wordsLength[left]) == strlen(wordsLength[right]))
             left++;
+
         else if ( left < right )
         {
             char* temp = wordsLength[left];
@@ -181,19 +213,6 @@ int SortingCompetition::partitionLength(char**& wordsLength, int left, int right
 
     return right;
 }
-
-/*void SortingCompetition::quickSortAlpha(char **& wordsLength, int left, int right)
-{
-    int maxWordLength = strlen(wordsLength[right]);
-    int minWordLength = strlen(wordsLength[left]);
-    int lengthCounter = 0;
-
-}
-
-int SortingCompetition::partitionAlpha(char **& wordsLength, int left, int right)
-{
-
-}*/
 
 //alphabetical quicksort
 void SortingCompetition::quickSortAlpha(char**& wordsAlpha, int left, int right)
@@ -212,7 +231,7 @@ int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
 
     while ( left < right )
     {
-        //while ( wordsAlpha[left] < pivot )
+        //while (wordsAlpha[left] < pivot )
         while(strcmp(wordsAlpha[left], pivot) <= -1)
             left++;
 
