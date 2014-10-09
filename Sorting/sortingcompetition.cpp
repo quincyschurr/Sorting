@@ -157,6 +157,7 @@ void SortingCompetition::sortData()
 //quick sort with integers
 void SortingCompetition::quickSortLength(char**& wordsLength, int left, int right)
 {
+    int size = right;
     if ( left < right )
     {
         int mid = 0;
@@ -164,7 +165,34 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
         quickSortLength(wordsLength, left, mid-1);
         quickSortLength(wordsLength, mid+1, right);
     }
+    //sorts each length alphabetically
+    int max = wordsLength[size][0];
+    int lengthCount = 0;
+    int start = 0;
+    int end = 0;
+    for(int i = 1; i < max; i++) {
+        lengthCount = 0;
+        while(words[lengthCount][0] == i) {
+            lengthCount++;
+            end++;
+        }
+        lengthCount = 0;
+        char ** temp = new char*[end+1];
+        for(int j = start; j <= end; j++) {
+            temp[lengthCount] = wordsLength[j];
+            lengthCount++;
+        }
+        quickSortAlpha(temp, 0, lengthCount - 1);
+        lengthCount = 0;
+        for(int j = start; j <= end; j++) {
+            wordsLength[j] = temp[lengthCount];
+            lengthCount++;
+        }
+        start = end;
+        delete temp; //might cause null pointer or seg fault
+    }
 }
+
 //partition for interger quickSort
 int SortingCompetition::partitionLength(char**& wordsLength, int left, int right)
 {
