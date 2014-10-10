@@ -1,4 +1,5 @@
 Prints sorted by length
+<<<<<<< HEAD
 a
 a
 z
@@ -18,3 +19,28 @@ le
 s
 sl
 z
+=======
+it
+is
+it
+the
+eof
+key
+not
+because
+adding
+extra
+characters
+random
+wording
+here
+today
+does
+words
+read
+minimal
+with
+testing
+
+
+>>>>>>> 2567a7b794fe10f022e24f4e658276dd5446cf1f

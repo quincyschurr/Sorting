@@ -3,15 +3,12 @@
         Jake Osselaer & Quincy Schurr
  */
 
-
-
 #include "sortingcompetition.h"
 
 using namespace std;
 
 SortingCompetition::SortingCompetition()
 {
-
 
 }
 
@@ -28,7 +25,6 @@ string SortingCompetition::getFileName()
 
 void SortingCompetition::outputData(const string& outputFileName)
 {
-    //fstream out(outputFileName.c_str(), ios::out);
     ofstream fout("output.txt", ios::out);
 
     cout << "WE ARE GETTING TO THE OUTPUT METHOD" << endl;
@@ -39,12 +35,6 @@ void SortingCompetition::outputData(const string& outputFileName)
         fout << wordsLength[i] << endl;
     }
     fout << endl << endl;
-
-    fout << "Prints sorted by ASCII" << endl;
-    for(int i = 0; i < counter; i++)
-    {
-        fout << wordsAlpha[i] << endl;
-    }
 
     //we have to go through and do a deep delete as well.
     //with a for loop
@@ -59,12 +49,15 @@ void SortingCompetition::outputData(const string& outputFileName)
 
 bool SortingCompetition::prepareData()
 {
+    //declare new char** to copy the read data into
+    //counter is = to number of words read in.
     wordsCopy = new char*[counter];
     wordsAlpha = new char*[counter];
     wordsLength = new char*[counter];
 
     cout << "This is executing in prepareData " << endl;
 
+    //copying values into the copy arrays
     for(int j = 0; j < counter; j++)
     {
         wordsCopy[j] = words[j];
@@ -135,6 +128,8 @@ void SortingCompetition::sortData()
     quickSortLength(wordsLength, left, right);
     quickSortAlpha(wordsAlpha, left, right);
 
+    cout << "End of sortData" << endl;
+
 }
 //quick sort with integers
 void SortingCompetition::quickSortLength(char**& wordsLength, int left, int right)
@@ -145,19 +140,59 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
         int mid = 0;
         mid = partitionLength(wordsLength, left, right);
         quickSortLength(wordsLength, left, mid-1);
-        quickSortLength(wordsLength, mid+1, right);
+        //quickSortLength(wordsLength, mid+1, right);
     }
     else{
 
     //int size = counter-1;
 
+
     //sorts each length alphabetically
-    int max = strlen(wordsLength[counter-1]);
-    int lengthCount = 0;
+    //int max = strlen(wordsLength[counter-1]);
+    //int lengthCount = 0;
+
+    //trying to get to sort each length alphabetically
+
+    int max = counter;
+    int lengthCounter = 0;
+
     int startIndex = 0;
     int endIndex = 0;
+    char** temp;
 
-    for(int r = 0; r < max; r++)
+    for(int r = startIndex; r <= max; r++)
+    {
+        int x = 0;
+        lengthCounter = 0;
+        while(strlen(wordsLength[x]) == strlen(wordsLength[r]))
+        {
+            lengthCounter++;
+            endIndex++;
+            x++;
+        }
+
+            temp = new char* [lengthCounter];
+            int tempNum = 0;
+            for(int v = tempNum; v < lengthCounter; v++)
+            {
+                temp[v] = wordsLength[v];
+            }
+
+            quickSortAlpha(temp, 0, lengthCounter - 1);
+
+            for(int b = startIndex; b < endIndex; b++)
+            {
+                wordsLength[b] = temp[b];
+            }
+
+     }
+
+        //we NEED to delete temp at each run...maybe. Unless we only pass
+        //from starting index to endIndex...
+        delete [] temp;
+        startIndex = endIndex;
+
+    /*for(int r = 0; r < max; r++)
     {
         while(wordsLength[lengthCount][0] == r)
         {
@@ -184,9 +219,14 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
         startIndex = endIndex;
 
         //must do a deep delete
+<<<<<<< HEAD
         //delete [] temp;
     }
     }//end else
+=======
+        delete [] temp;
+    }*/
+>>>>>>> 2567a7b794fe10f022e24f4e658276dd5446cf1f
 
 }
 
