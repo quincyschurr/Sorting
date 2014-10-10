@@ -1,13 +1,17 @@
 Prints sorted by length
+a
+d
+e
 go
 if
+n
 to
 see
 the
-with
-will
 this
+will
 sort
+with
 words
 bigger
 testing

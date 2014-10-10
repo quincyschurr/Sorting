@@ -37,6 +37,10 @@ private:
     int partitionAlpha(char**&, int, int);
     int partitionLength(char**&, int, int);
     string getFileName();
+    void lengthAlpha(char**&);
+
+    void lengthAlpha2(char**&);
+
 
 public:
 
