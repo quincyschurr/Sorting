@@ -15,6 +15,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 
+    //check to see if there are enough arguments
     if(argc != 3)
     {
         cerr << "There are not enough files to run this program" << endl;
@@ -22,13 +23,13 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    //declare chrono variables
     chrono::time_point<chrono::system_clock> start, end;
-
 
     //create a SortingCompetition object
     SortingCompetition sc1(argv[1]);
-    sc1.setFileName(argv[1]);
 
+    sc1.setFileName(argv[1]);
     sc1.readData();
     sc1.prepareData();
 
