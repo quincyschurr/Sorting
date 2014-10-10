@@ -139,7 +139,7 @@ void SortingCompetition::sortData()
 //quick sort with integers
 void SortingCompetition::quickSortLength(char**& wordsLength, int left, int right)
 {
-    int size = right;
+
     if ( left < right )
     {
         int mid = 0;
@@ -147,9 +147,12 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
         quickSortLength(wordsLength, left, mid-1);
         quickSortLength(wordsLength, mid+1, right);
     }
+    else{
+
+    //int size = counter-1;
 
     //sorts each length alphabetically
-    int max = strlen(wordsLength[size]);
+    int max = strlen(wordsLength[counter-1]);
     int lengthCount = 0;
     int startIndex = 0;
     int endIndex = 0;
@@ -164,7 +167,7 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
 
         lengthCount = 0;
         char** temp = new char*[endIndex+1];
-        for(int j = startIndex; j <= endIndex; j++)
+        for(int j = startIndex; j < endIndex; j++)
         {
             temp[lengthCount] = wordsLength[j];
             lengthCount++;
@@ -172,7 +175,7 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
 
         quickSortAlpha(temp, 0, lengthCount - 1);
         lengthCount = 0;
-        for(int k = startIndex; k <= endIndex; k++)
+        for(int k = startIndex; k < endIndex; k++)
         {
             wordsLength[k] = temp[lengthCount];
             lengthCount++;
@@ -181,8 +184,9 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
         startIndex = endIndex;
 
         //must do a deep delete
-        delete [] temp;
+        //delete [] temp;
     }
+    }//end else
 
 }
 
