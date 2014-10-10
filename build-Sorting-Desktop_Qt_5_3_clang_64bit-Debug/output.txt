@@ -1,46 +1,16 @@
 Prints sorted by length
-<<<<<<< HEAD
-a
-a
-z
-s
-e
-sl
-ae
-le
-
-
-Prints sorted by ASCII
-a
-a
-ae
-e
-le
-s
-sl
-z
-=======
-it
-is
-it
+go
+if
+to
+see
 the
-eof
-key
-not
-because
-adding
-extra
-characters
-random
-wording
-here
-today
-does
-words
-read
-minimal
 with
+will
+this
+sort
+words
+bigger
 testing
+alphabet
 
 
->>>>>>> 2567a7b794fe10f022e24f4e658276dd5446cf1f

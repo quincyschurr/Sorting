@@ -126,7 +126,7 @@ void SortingCompetition::sortData()
     int right = counter - 1;
 
     quickSortLength(wordsLength, left, right);
-    quickSortAlpha(wordsAlpha, left, right);
+    //quickSortAlpha(wordsAlpha, left, right);
 
     cout << "End of sortData" << endl;
 
@@ -140,93 +140,71 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
         int mid = 0;
         mid = partitionLength(wordsLength, left, right);
         quickSortLength(wordsLength, left, mid-1);
-        //quickSortLength(wordsLength, mid+1, right);
+        quickSortLength(wordsLength, mid+1, right);
     }
-    else{
-
-    //int size = counter-1;
-
-
-    //sorts each length alphabetically
-    //int max = strlen(wordsLength[counter-1]);
-    //int lengthCount = 0;
+    else
+    {
 
     //trying to get to sort each length alphabetically
 
-    int max = counter;
-    int lengthCounter = 0;
+    int max = counter; // how many words in the array
+    int lengthCounter; //to count how many words of a certain length
 
-    int startIndex = 0;
-    int endIndex = 0;
-    char** temp;
+    int startIndex = 0; //startIndex should jump around. So if we have 5 words of length 2 this should start the next round at the next length
+    int endIndex = 0; //endIndex will also jump. Should keep adding so that the final endIndex is the number of words - 1
+    char** temp; //create temp array that will have the words of a certain length to be passed to alphasort
 
     for(int r = startIndex; r <= max; r++)
     {
-        int x = 0;
-        lengthCounter = 0;
+
+        //this for loop will iterate through all words starting at startIndex, so will take less time as
+        //we get closer to the end of the array, we could probably do this more efficiently
+
+        int x = 0;//incrementing x, sort of used this to replace a second for loop
+        lengthCounter = 0; //declaring lengthCounter at this step because this changes with each iteration.
+
         while(strlen(wordsLength[x]) == strlen(wordsLength[r]))
-        {
+        { //while the string length of x (which I increment) is equal to the length of r(startingIndex)
+            //we will increment the length counter, the end index and x
+
             lengthCounter++;
             endIndex++;
             x++;
         }
 
-            temp = new char* [lengthCounter];
-            int tempNum = 0;
-            for(int v = tempNum; v < lengthCounter; v++)
+            temp = new char* [lengthCounter]; //declare new char* of length of array
+            //of the numbers of words that we have of a certain length
+
+            int tempNum = 0; //my attempt at trying to get the right index
+
+            //this for loop will always start at zero and continue for the length of temp
+            for(int v = 0; v < lengthCounter; v++)
             {
-                temp[v] = wordsLength[v];
+                temp[v] = wordsLength[v + startIndex]; //I think this will work now
             }
 
-            quickSortAlpha(temp, 0, lengthCounter - 1);
+            quickSortAlpha(temp, 0, lengthCounter - 1); //call quickSortAlpha with temp. This works
 
+            //store the sorted array back into the corresponding index in wordsLength
             for(int b = startIndex; b < endIndex; b++)
             {
-                wordsLength[b] = temp[b];
+                wordsLength[b + startIndex] = temp[b];
             }
 
      }
 
+        for(int n = 0; n < lengthCounter; n++)
+        {
+            delete temp[n];
+        }
         //we NEED to delete temp at each run...maybe. Unless we only pass
-        //from starting index to endIndex...
+        //from starting index to endIndex... but still need to delete the words and then the array itself.
         delete [] temp;
+
+        //must set this at the end before we run the top for loop.
         startIndex = endIndex;
-
-    /*for(int r = 0; r < max; r++)
-    {
-        while(wordsLength[lengthCount][0] == r)
-        {
-            lengthCount++;
-            endIndex++;
-        }
-
-        lengthCount = 0;
-        char** temp = new char*[endIndex+1];
-        for(int j = startIndex; j < endIndex; j++)
-        {
-            temp[lengthCount] = wordsLength[j];
-            lengthCount++;
-        }
-
-        quickSortAlpha(temp, 0, lengthCount - 1);
-        lengthCount = 0;
-        for(int k = startIndex; k < endIndex; k++)
-        {
-            wordsLength[k] = temp[lengthCount];
-            lengthCount++;
-        }
-
-        startIndex = endIndex;
-
-        //must do a deep delete
-<<<<<<< HEAD
-        //delete [] temp;
     }
-    }//end else
-=======
-        delete [] temp;
-    }*/
->>>>>>> 2567a7b794fe10f022e24f4e658276dd5446cf1f
+
 
 }
 
