@@ -65,6 +65,7 @@ bool SortingCompetition::prepareData()
         wordsLength[j] = words[j];
     }
 
+    return true;
 }
 
 bool SortingCompetition::readData()
@@ -107,6 +108,7 @@ bool SortingCompetition::readData()
 
     cout << "This is the end of readData" <<endl;
     fin.close();
+    return true;
 }
 
 void SortingCompetition::setFileName(const string& inputFileName)
@@ -190,8 +192,6 @@ void SortingCompetition::lengthAlpha(char**& wordsLength) {
 
             temp = new char* [lengthCounter]; //declare new char* of length of array
             //of the numbers of words that we have of a certain length
-
-            int tempNum = 0; //my attempt at trying to get the right index
 
             //this for loop will always start at zero and continue for the length of temp
             for(int v = 0; v < lengthCounter; v++)
@@ -301,12 +301,16 @@ void SortingCompetition::lengthAlpha2(char **& wordsLength) {
     int lengthCount = 0;
     int x = 0; //iterator
 
-    for(int i = 1; i <= longestWord; i++) { //iterates for each size of word
+    for(int i = 1; i <= longestWord; i++)
+    { //iterates for each size of word
         x = startIndex;
         cout << startIndex << endl;
-        while(true) {
-            if(i != strlen(wordsLength[x])) {
-                cout << wordsLength[x];
+        while(true)
+            //While what is true???
+        {
+            if(i != strlen(wordsLength[x]))
+            {
+                cout << wordsLength[x] << endl;
                 break;
             }
             else {
@@ -319,6 +323,7 @@ void SortingCompetition::lengthAlpha2(char **& wordsLength) {
         char ** temp = new char*[lengthCount];
         for(int j = 0; j < lengthCount; j++) {
             temp[j] = wordsLength[x];
+            cout << "TEMP[" << j << "] " << temp[j] << endl;
             x++;
         }
         quickSortAlpha(temp, 0, lengthCount -1);
@@ -327,8 +332,22 @@ void SortingCompetition::lengthAlpha2(char **& wordsLength) {
             wordsLength[x] = temp[j];
             x++;
         }
-        startIndex = endIndex - 1;
+        startIndex = endIndex;
+        //I changed this from endIndex-1 to endIndex, it seemed to work a bit better
+        //but still has problems
+
+        //WHEN I ADDED THIS IN IT DIDN'T DO MUCH, but I do think we need to do a deep delete
+
+        //did this based on this
+        //http://www.cplusplus.com/forum/general/73615/
+        //http://www.cs.cornell.edu/Info/Courses/Fall-97/CS213/notes/lecture7.html
+        for(int b = 0; b < lengthCount; b++)
+        {
+            delete[] temp[b];
+        }
+
         delete [] temp;
+
     }
 
 }
