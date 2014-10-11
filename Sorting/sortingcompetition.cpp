@@ -305,12 +305,14 @@ void SortingCompetition::lengthAlpha2(char **& wordsLength) {
     { //iterates for each size of word
         x = startIndex;
         cout << startIndex << endl;
+        lengthCount = 0;
         while(true)
             //While what is true???
+            //true just makes it loop forever until you say break;
         {
             if(i != strlen(wordsLength[x]))
             {
-                cout << wordsLength[x] << endl;
+                //cout << wordsLength[x] << endl;
                 break;
             }
             else {
@@ -319,19 +321,26 @@ void SortingCompetition::lengthAlpha2(char **& wordsLength) {
                 endIndex++;
             }
         }
+        /*for(int j = startIndex; j <= endIndex; j++) {
+            cout << "wordsLength[" << j << "]" << wordsLength[j] << endl;
+        }*/
         x = startIndex;
         char ** temp = new char*[lengthCount];
         for(int j = 0; j < lengthCount; j++) {
             temp[j] = wordsLength[x];
-            cout << "TEMP[" << j << "] " << temp[j] << endl;
+            //cout << "TEMP[" << j << "] " << temp[j] << endl;
             x++;
         }
         quickSortAlpha(temp, 0, lengthCount -1);
+
         x = startIndex;
         for(int j = 0; j < lengthCount; j++) {
             wordsLength[x] = temp[j];
             x++;
         }
+        /*for(int j = startIndex; j < endIndex; j++) {
+            cout << "wordsLength[" << j << "]" << wordsLength[j] << endl;
+        }*/
         startIndex = endIndex;
         //I changed this from endIndex-1 to endIndex, it seemed to work a bit better
         //but still has problems
@@ -341,13 +350,25 @@ void SortingCompetition::lengthAlpha2(char **& wordsLength) {
         //did this based on this
         //http://www.cplusplus.com/forum/general/73615/
         //http://www.cs.cornell.edu/Info/Courses/Fall-97/CS213/notes/lecture7.html
-        for(int b = 0; b < lengthCount; b++)
+
+
+        //FOUND THE PROBLEM
+        //when this is put in the code wordsLength has nothing to point to
+        //so it is filled with weird characters and cannot be put in output
+        /*for(int b = 0; b < lengthCount; b++)
         {
             delete[] temp[b];
-        }
+        }*/
 
         delete [] temp;
 
+        //this ends the for loop and without it, it gets stuck in an infinite loop
+        //or something like that
+        if(strlen(wordsLength[endIndex]) == longestWord) {
+            break;
+        }
+
     }
 
+    cout << "END LENGTHALPHA <<<<<<";
 }

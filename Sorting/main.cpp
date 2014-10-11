@@ -15,7 +15,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 
-    argv[1] = "test.txt";
+    argv[1] = "harrypotter.txt";
     argv[2] = "output.txt";
     /*
     //check to see if there are enough arguments
