@@ -25,11 +25,16 @@ private:
 
     vector <char*> wordsVector;
     char ** words;
-    char** wordsAlpha;
-    char** wordsLength;
     char** wordsCopy;
+    char** wordsLength;
     string input;
     int counter;
+
+    void quickSortTest(char**&, int, int);
+    int ThreePivotLength(char**&, int, int);
+
+    void alphaSortTest(char**, int, int);
+    int ThreePivotAlpha(char**&, int, int);
 
 
     void quickSortLength(char**&, int, int);
@@ -37,8 +42,6 @@ private:
     int partitionAlpha(char**&, int, int);
     int partitionLength(char**&, int, int);
     string getFileName();
-    void lengthAlpha(char**&);
-
     void lengthAlpha2(char**&);
 
 
