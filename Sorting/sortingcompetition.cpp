@@ -279,7 +279,7 @@ void SortingCompetition::lengthAlpha2(char **& wordsLength)
 //http://stackoverflow.com/questions/7559608/median-of-three-values-strategy-
 //http://stackoverflow.com/questions/5666717/median-3-quick-sort-implementation
 
-void quickSortTest(char**& wordsCopy, int left, int right)
+void SortingCompetition::quickSortTest(char**& wordsCopy, int left, int right)
 {
     if ( left < right )
     {
@@ -293,7 +293,7 @@ void quickSortTest(char**& wordsCopy, int left, int right)
 }
 
 //http://www.java2s.com/Code/Java/Collections-Data-Structure/Quicksortwithmedianofthreepartitioning.htm
-int ThreePivotLength(char**& wordsCopy, int left, int right)
+int SortingCompetition::ThreePivotLength(char**& wordsCopy, int left, int right)
 {
 
     char* pivotTest;
