@@ -317,8 +317,11 @@ int SortingCompetition::ThreePivotLength(char**& wordsCopy, int left, int right)
         swap(center, rpivot);
     }
 
-    swap(center, rpivot - 1);
-    return strlen(wordsCopy[right-1]);
+    //compiler didnt like rpivot-1
+    int x = rpivot-1;
+    swap(center, x);
+    //return strlen(wordsCopy[right-1]);
+    return strlen(wordsCopy[x]);
 
 }
 
