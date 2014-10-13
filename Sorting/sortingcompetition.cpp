@@ -129,7 +129,7 @@ void SortingCompetition::sortData()
 
 
     //trying to test the median three pivot!!!
-    //quickSortTest(wordsCopy, left, right);
+    quickSortTest(wordsCopy, left, right);
 }
 //quick sort with integers
 void SortingCompetition::quickSortLength(char**& wordsLength, int left, int right)
@@ -279,67 +279,48 @@ void SortingCompetition::lengthAlpha2(char **& wordsLength)
 //http://stackoverflow.com/questions/7559608/median-of-three-values-strategy-
 //http://stackoverflow.com/questions/5666717/median-3-quick-sort-implementation
 
-/*void quickSortTest(char**& wordsCopy, int left, int right)
+void quickSortTest(char**& wordsCopy, int left, int right)
 {
-    int count = 0;
-    count++;
-
-    //Don't know what the count is for...
-
     if ( left < right )
     {
-        int mid = 0;
-        mid = ThreePivotLength(wordsCopy, left, right);
-        quickSortTest(wordsCopy, left, mid-1);
-        quickSortTest(wordsCopy, mid+1, right);
+        //I can't figure out why there is an error here...
+        int pivot = ThreePivotLength(wordsCopy, left, right);
+        quickSortTest(wordsCopy, left, pivot-1);
+        quickSortTest(wordsCopy, pivot+1, right);
     }
 
 
 }
 
+//http://www.java2s.com/Code/Java/Collections-Data-Structure/Quicksortwithmedianofthreepartitioning.htm
 int ThreePivotLength(char**& wordsCopy, int left, int right)
 {
-    int x = wordsCopy[left];//left
-    int y = wordsCopy[(right)/2];//middle
-    int z = wordsCopy[right];//right
-    int i = left - 1;
-    int j = right;
 
-    if(y > x && y < z || y > z && y < x)
+    char* pivotTest;
+
+    int lpivot = strlen(wordsCopy[left]);
+    int center = strlen(wordsCopy[(left+right)/2]);
+    int rpivot = strlen(wordsCopy[right]);
+
+    if(lpivot > center)
     {
-        x = y;
+        swap(lpivot, center);
     }
 
-    else if(z > x && z < y || z > y && z < x)
+    if(lpivot > rpivot)
     {
-        x = z;
+        swap(lpivot, rpivot);
     }
 
-    while(1)
+    if(center > rpivot)
     {
-        do
-        {
-            j--;
-            count++;
-        }
-        while(wordsCopy[j] > x);
-        do
-        {
-            i++;
-            count++;
-        }
-        while(wordsCopy[i] < x);
-
-        if(i < j)
-        {
-            swap(&wordsCopy[i], &wordsCopy[j]);
-        }
-        else
-            return (j + 1);
+        swap(center, rpivot);
     }
 
+    swap(center, rpivot - 1);
+    return strlen(wordsCopy[right-1]);
 
-}*/
+}
 
 SortingCompetition::~SortingCompetition()
 {

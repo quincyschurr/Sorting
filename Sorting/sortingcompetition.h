@@ -16,6 +16,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <algorithm>
 
 using namespace std;
 
@@ -33,7 +34,7 @@ private:
     void quickSortTest(char**&, int, int);
     int ThreePivotLength(char**&, int, int);
 
-    void alphaSortTest(char**, int, int);
+    void alphaSortTest(char**&, int, int);
     int ThreePivotAlpha(char**&, int, int);
 
 
