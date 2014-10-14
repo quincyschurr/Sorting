@@ -150,8 +150,8 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
 int SortingCompetition::partitionLength(char**& wordsLength, int left, int right)
 {
 
-    int pivot = findMedianLength(wordsLength, left, right);
-    //int pivot = medianof5(wordsLength, left, right);
+    //int pivot = findMedianLength(wordsLength, left, right);
+    int pivot = medianof5(wordsLength, left, right);
 
     while ( left < right )
     {
@@ -188,7 +188,8 @@ void SortingCompetition::quickSortAlpha(char**& wordsAlpha, int left, int right)
 //partition for alphabetical quickSort
 int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
 {
-    //char pivot = findMedianAlpha(wordsAlpha, left, right);
+    //char pivot = medianof5alpha(wordsAlpha, left, right);
+    //cout << pivot << endl;
     //will have to change pivot to &pivot in all strcmp
     char* pivot = wordsAlpha[right];
 
@@ -196,15 +197,18 @@ int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
     {
         //while (wordsAlpha[left] < pivot )
         while(strcmp(wordsAlpha[left], pivot) <= -1)
+        //while(wordsAlpha[left][0] < pivot)
             left++;
 
         //while ( wordsAlpha[right] > pivot )
         while(strcmp(wordsAlpha[right], pivot) >= 1)
+        //while(wordsAlpha[right][0] > pivot)
             right--;
 
         //if ( strlen(wordsAlpha[left] == strlen(wordsAlpha[right]) )
-        if(strcmp(wordsAlpha[left], wordsAlpha[right]) == 0)
+        if(strcmp(wordsAlpha[left], wordsAlpha[right]) == 0) {
             left++;
+        }
         else if ( left < right )
         {
             char* temp = wordsAlpha[left];
@@ -304,7 +308,6 @@ char SortingCompetition::medianof5alpha(char** words, int left, int right)
     median = (char)m;
 
     return median;
-
 }
 
 int SortingCompetition::findMedianLength(char** words, int left, int right)
