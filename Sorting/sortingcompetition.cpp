@@ -124,12 +124,13 @@ void SortingCompetition::sortData()
     int left = 0;
     int right = counter - 1;
 
-    quickSortLength(wordsLength, left, right);
+    //quickSortLength(wordsLength, left, right);
+    quickSortTest(wordsCopy, left, right);
     lengthAlpha2(wordsLength);
 
 
     //trying to test the median three pivot!!!
-    quickSortTest(wordsCopy, left, right);
+    //quickSortTest(wordsCopy, left, right);
 }
 //quick sort with integers
 void SortingCompetition::quickSortLength(char**& wordsLength, int left, int right)
@@ -290,38 +291,37 @@ void SortingCompetition::quickSortTest(char**& wordsCopy, int left, int right)
     }
 
 
+
 }
 
 //http://www.java2s.com/Code/Java/Collections-Data-Structure/Quicksortwithmedianofthreepartitioning.htm
 int SortingCompetition::ThreePivotLength(char**& wordsCopy, int left, int right)
 {
+    //https://www.youtube.com/watch?v=6UHCG64tHgo (partition general method)
+    //https://www.youtube.com/watch?v=gP1L5iVfdt0 (picking a pivot by random)
 
-    char* pivotTest;
+    int center = strlen(wordsCopy[right/2]);
 
-    int lpivot = strlen(wordsCopy[left]);
-    int center = strlen(wordsCopy[(left+right)/2]);
-    int rpivot = strlen(wordsCopy[right]);
+    //this while loop is causing an infinite loop
+    while(left <= (strlen(wordsCopy[center])) && right > (strlen(wordsCopy[center])))
+    {//trying to make it so the pivot will be the biggest part of the partion
+        //so if there are multiple strings with the same length the center value
+        //will be at the highest end before length sort... if that makes sense
 
-    if(lpivot > center)
-    {
-        swap(lpivot, center);
+        if(strlen(wordsCopy[left]) > center)
+        {
+            swap(wordsCopy[left], wordsCopy[center]);
+            left++;
+        }
+
+        if(strlen(wordsCopy[right]) <= strlen(wordsCopy[center]))
+        {
+            swap(wordsCopy[right], wordsCopy[center]);
+            right--;
+        }
     }
 
-    if(lpivot > rpivot)
-    {
-        swap(lpivot, rpivot);
-    }
-
-    if(center > rpivot)
-    {
-        swap(center, rpivot);
-    }
-
-    //compiler didnt like rpivot-1
-    int x = rpivot-1;
-    swap(center, x);
-    //return strlen(wordsCopy[right-1]);
-    return strlen(wordsCopy[x]);
+    return strlen(wordsCopy[center]);
 
 }
 
