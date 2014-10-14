@@ -150,7 +150,7 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
 int SortingCompetition::partitionLength(char**& wordsLength, int left, int right)
 {
 
-    int pivot = strlen(wordsLength[right]);
+    int pivot = findMedianLength(wordsLength, left, right);
 
     while ( left < right )
     {
@@ -187,6 +187,8 @@ void SortingCompetition::quickSortAlpha(char**& wordsAlpha, int left, int right)
 //partition for alphabetical quickSort
 int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
 {
+    //char pivot = findMedianAlpha(wordsAlpha, left, right);
+    //will have to change pivot to &pivot in all strcmp
     char* pivot = wordsAlpha[right];
 
     while ( left < right )
@@ -275,7 +277,25 @@ void SortingCompetition::lengthAlpha2(char **& wordsLength)
     }
 }
 
+int SortingCompetition::findMedianLength(char ** words, int left, int right) {
+    int mid = (left + right)/2;
+    int median = strlen(words[left]) + strlen(words[right]) + strlen(words[mid]);
+    median = median/3;
+    return median;
+}
 
+//finds median by comparing leading chars by using median of three
+char SortingCompetition::findMedianAlpha(char ** words, int left, int right) {
+    char median = '0';
+    int mid = (left + right)/2;
+    int l = words[left][0];
+    int r = words[right][0];
+    int m = words[mid][0];
+    m = (l + r + m)/3;
+    median = (char)m;
+
+    return median;
+}
 
 //http://stackoverflow.com/questions/7559608/median-of-three-values-strategy-
 //http://stackoverflow.com/questions/5666717/median-3-quick-sort-implementation

@@ -37,6 +37,8 @@ private:
     void alphaSortTest(char**&, int, int);
     int ThreePivotAlpha(char**&, int, int);
 
+    int findMedianLength(char**, int, int);
+    char findMedianAlpha(char**, int, int);
 
     void quickSortLength(char**&, int, int);
     void quickSortAlpha(char**&, int, int);
