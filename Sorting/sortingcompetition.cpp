@@ -186,7 +186,7 @@ void SortingCompetition::quickSortAlpha(char**& wordsAlpha, int left, int right)
     }
 }
 //partition for alphabetical quickSort
-int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
+/*int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
 {
     //char pivot = medianof5alpha(wordsAlpha, left, right);
     //cout << pivot << endl;
@@ -210,6 +210,41 @@ int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
             left++;
         }
         else if ( left < right )
+        {
+            char* temp = wordsAlpha[left];
+            wordsAlpha[left] = wordsAlpha[right];
+            wordsAlpha[right] = temp;
+        }
+    }
+
+    return right;
+
+}*/
+
+int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
+{
+    char pivot = medianof5alpha(wordsAlpha, left, right);
+    //will have to change pivot to &pivot in all strcmp
+
+    while(left < right)
+    {
+        while(strcmp(wordsAlpha[left], &pivot) <= -1)
+        {
+            left++;
+        }
+
+        while(strcmp(wordsAlpha[right], &pivot) >= 1)
+        {
+            right--;
+        }
+
+        if(strcmp(wordsAlpha[left], wordsAlpha[right]) == 0)
+        {
+                left++;
+        }
+
+        //When I run the debugger the only that ever goes into temp is 'a'
+        else if (left < right)
         {
             char* temp = wordsAlpha[left];
             wordsAlpha[left] = wordsAlpha[right];
