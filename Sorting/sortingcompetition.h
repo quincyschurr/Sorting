@@ -25,7 +25,6 @@ private:
 
     vector <char*> wordsVector; //to store words as we read them in
     char ** words; //translate vector into char**
-    char** wordsCopy;
     char** wordsLength; //copy of words to use for sort
     string input;//text file argument
     int counter;//for number of words

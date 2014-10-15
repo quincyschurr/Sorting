@@ -28,17 +28,22 @@ void SortingCompetition::outputData(const string& outputFileName)
 
     cout << "WE ARE GETTING TO THE OUTPUT METHOD" << endl;
 
+    fout << "*****STARTING OUTPUT*****" << endl;
+
     for(int i = 0; i < counter; i++)
     {
         fout << wordsLength[i] << endl;
     }
-    fout << endl << endl;
+    fout << endl;
+    fout << "*****END OF OUTPUT*****" << endl;
 
-    //Are we sure we don't have to do a deep delete? I think we may
+    for(int h = 0; h < counter; h++)
+    {
+        delete wordsLength[h];
+    }
 
     delete[] words;
     delete[] wordsLength;
-    delete[] wordsCopy;
 
     fout.close();
 }
@@ -49,7 +54,6 @@ bool SortingCompetition::prepareData()
     //counter is = to number of words read in.
 
     wordsLength = new char*[counter];
-    wordsCopy = new char*[counter];
 
     cout << "This is executing in prepareData " << endl;
 
@@ -57,7 +61,6 @@ bool SortingCompetition::prepareData()
     for(int j = 0; j < counter; j++)
     {
         wordsLength[j] = words[j];
-        wordsCopy[j] = words[j]; //using this as a test array currently. May not need in final execution
     }
 
     return true;
