@@ -124,7 +124,8 @@ void SortingCompetition::sortData()
     int left = 0;
     int right = counter - 1;
 
-    quickSortLength(wordsLength, left, right);
+    mergesort(wordsLength, left, right, counter);
+    //quickSortLength(wordsLength, left, right);
     //quickSortTest(wordsCopy, left, right);
     lengthAlpha2(wordsLength);
 
@@ -238,7 +239,7 @@ int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
 void SortingCompetition::lengthAlpha2(char **& wordsLength)
 {
 
-    //cout << "ENTERING lengthAlpha" << endl;
+    cout << "ENTERING lengthAlpha" << endl;
 
     int longestWord = strlen(wordsLength[counter - 1]);
     int startIndex = 0;
@@ -276,7 +277,7 @@ void SortingCompetition::lengthAlpha2(char **& wordsLength)
         }
 
         //pass temp into alpha sort
-        quickSortAlpha(temp, 0, lengthCount -1);
+        mergesortAlpha(temp, 0, lengthCount -1, lengthCount);
         x = startIndex;
 
         //place the sorted temp array back into correct elements in array
@@ -405,6 +406,113 @@ int SortingCompetition::ThreePivotLength(char**& wordsCopy, int left, int right)
     return strlen(wordsCopy[center]);
 
 }*/
+
+void SortingCompetition::mergesort(char ** words, int left, int right, int cap)
+{
+    int mid;
+    if (left < right)
+    {
+        mid=(left + right)/2;
+        mergesort(words, left, mid, cap);
+        mergesort(words, mid+1, right, cap);
+        merge(words, left, right, mid, cap);
+    }
+    return;
+}
+
+void SortingCompetition::merge(char ** words, int left, int right, int mid, int cap)
+{
+    int i, j, k;
+    char * temp[cap];
+    i = left;
+    k = left;
+    j = mid + 1;
+    while (i <= mid && j <= right)
+    {
+        if (strlen(words[i]) < strlen(words[j]))
+        {
+            temp[k] = words[i];
+            k++;
+            i++;
+        }
+        else
+        {
+            temp[k] = words[j];
+            k++;
+            j++;
+        }
+    }
+    while (i <= mid)
+    {
+        temp[k] = words[i];
+        k++;
+        i++;
+    }
+    while (j <= right)
+    {
+        temp[k] = words[j];
+        k++;
+        j++;
+    }
+    for (i = left; i < k; i++)
+    {
+        words[i] = temp[i];
+    }
+}
+
+void SortingCompetition::mergesortAlpha(char ** words, int left, int right, int cap)
+{
+    int mid;
+    if (left < right)
+    {
+        mid=(left + right)/2;
+        mergesortAlpha(words, left, mid, cap);
+        mergesortAlpha(words, mid+1, right, cap);
+        mergeAlpha(words, left, right, mid, cap);
+    }
+    return;
+}
+
+void SortingCompetition::mergeAlpha(char ** words, int left, int right, int mid, int cap)
+{
+    int i, j, k;
+    char * temp[cap];
+    i = left;
+    k = left;
+    j = mid + 1;
+    while (i <= mid && j <= right)
+    {
+        if (strcmp(words[i], words[j]) <= -1)
+        {
+            temp[k] = words[i];
+            k++;
+            i++;
+        }
+        else
+        {
+            temp[k] = words[j];
+            k++;
+            j++;
+        }
+    }
+    while (i <= mid)
+    {
+        temp[k] = words[i];
+        k++;
+        i++;
+    }
+    while (j <= right)
+    {
+        temp[k] = words[j];
+        k++;
+        j++;
+    }
+    for (i = left; i < k; i++)
+    {
+        words[i] = temp[i];
+    }
+}
+
 
 SortingCompetition::~SortingCompetition()
 {
