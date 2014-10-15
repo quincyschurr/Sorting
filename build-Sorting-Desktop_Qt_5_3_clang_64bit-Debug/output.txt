@@ -1,4 +1,3 @@
-Prints sorted by length
 "
 "
 "

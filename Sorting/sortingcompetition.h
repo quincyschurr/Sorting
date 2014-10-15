@@ -3,7 +3,6 @@
         Jake Osselaer & Quincy Schurr
  */
 
-
 #ifndef SORTINGCOMPETITION_H
 #define SORTINGCOMPETITION_H
 
@@ -24,12 +23,12 @@ class SortingCompetition
 {
 private:
 
-    vector <char*> wordsVector;
-    char ** words;
+    vector <char*> wordsVector; //to store words as we read them in
+    char ** words; //translate vector into char**
     char** wordsCopy;
-    char** wordsLength;
-    string input;
-    int counter;
+    char** wordsLength; //copy of words to use for sort
+    string input;//text file argument
+    int counter;//for number of words
 
     void quickSortTest(char**&, int, int);
     int ThreePivotLength(char**&, int, int);
@@ -38,14 +37,15 @@ private:
     char* medianof5alpha(char**, int, int);
 
     int findMedianLength(char**, int, int);
-    char findMedianAlpha(char**, int, int);
+    char* findMedianAlpha(char**, int, int);
 
+    //these functions all work with first element pivot
+    string getFileName();
+    void lengthAlpha2(char**&);
     void quickSortLength(char**&, int, int);
     void quickSortAlpha(char**&, int, int);
     int partitionAlpha(char**&, int, int);
     int partitionLength(char**&, int, int);
-    string getFileName();
-    void lengthAlpha2(char**&);
 
 
 public:
@@ -56,7 +56,7 @@ public:
     void setFileName(const string& inputFileName);
     void sortData();
 
-
+    //constructors and destructors
     SortingCompetition();
     SortingCompetition(const string& inputFileName);
     ~SortingCompetition();

@@ -4,7 +4,6 @@
  */
 
 #include "sortingcompetition.h"
-
 using namespace std;
 
 SortingCompetition::SortingCompetition()
@@ -29,15 +28,13 @@ void SortingCompetition::outputData(const string& outputFileName)
 
     cout << "WE ARE GETTING TO THE OUTPUT METHOD" << endl;
 
-    fout << "Prints sorted by length" << endl;
     for(int i = 0; i < counter; i++)
     {
         fout << wordsLength[i] << endl;
     }
     fout << endl << endl;
 
-    //we have to go through and do a deep delete as well.
-    //with a for loop
+    //Are we sure we don't have to do a deep delete? I think we may
 
     delete[] words;
     delete[] wordsLength;
@@ -50,6 +47,7 @@ bool SortingCompetition::prepareData()
 {
     //declare new char** to copy the read data into
     //counter is = to number of words read in.
+
     wordsLength = new char*[counter];
     wordsCopy = new char*[counter];
 
@@ -59,7 +57,7 @@ bool SortingCompetition::prepareData()
     for(int j = 0; j < counter; j++)
     {
         wordsLength[j] = words[j];
-        wordsCopy[j] = words[j];
+        wordsCopy[j] = words[j]; //using this as a test array currently. May not need in final execution
     }
 
     return true;
@@ -72,6 +70,7 @@ bool SortingCompetition::readData()
     string temporary;
     char* buffer;
 
+    //need to change this so that we use the getFilename function.
     ifstream fin(this->input.c_str());//add a file to read in
 
     if(!fin)
@@ -80,18 +79,19 @@ bool SortingCompetition::readData()
         exit(1);
     }
 
-
     while(!fin.eof())
     {
         fin >> temporary;
-        buffer = new char[temporary.length() + 1];
-        memset(buffer, 0, (temporary.length() + 1) * sizeof(char));
+        buffer = new char[temporary.length() + 1];//accounts for the null terminator of the phrase
+        memset(buffer, 0, (temporary.length() + 1) * sizeof(char));//initalize buffer to 0 so no random characters
 
+        //this will get each character and add it to the bugger
         for(int k = 0; k < temporary.length(); k++)
         {
             buffer[k] = temporary[k];
         }
 
+        //put the buffer in a vector of char*
         wordsVector.push_back(buffer);
         counter++;
     }
@@ -111,16 +111,13 @@ bool SortingCompetition::readData()
 void SortingCompetition::setFileName(const string& inputFileName)
 {
     input = inputFileName.c_str();
-    cout << "This is executing in setFileName" << endl;
-
 }
 
 void SortingCompetition::sortData()
 {
     cout << "This is executing in sortData" << endl;
 
-    //Just call in order of what we need sorted
-
+    //left is the first element of array and right is the final element
     int left = 0;
     int right = counter - 1;
 
@@ -128,14 +125,12 @@ void SortingCompetition::sortData()
     //quickSortTest(wordsCopy, left, right);
     lengthAlpha2(wordsLength);
 
-
-    //trying to test the median three pivot!!!
-    //quickSortTest(wordsCopy, left, right);
 }
+
 //quick sort with integers
 void SortingCompetition::quickSortLength(char**& wordsLength, int left, int right)
 {
-
+    //calls quickSortLength recursively to sort by length
     if ( left < right )
     {
         int mid = 0;
@@ -143,32 +138,40 @@ void SortingCompetition::quickSortLength(char**& wordsLength, int left, int righ
         quickSortLength(wordsLength, left, mid-1);
         quickSortLength(wordsLength, mid+1, right);
     }
-
 }
 
 //partition for interger quickSort
 int SortingCompetition::partitionLength(char**& wordsLength, int left, int right)
 {
 
-    //int pivot = findMedianLength(wordsLength, left, right);
-    int pivot = medianof5(wordsLength, left, right);
+    //int pivot = findMedianLength(wordsLength, left, right);//with median of 3 pivot
+    int pivot = medianof5(wordsLength, left, right); //median of 5 pivot
 
     while ( left < right )
     {
         while (strlen(wordsLength[left]) < pivot )
-            left++;
+        {
+            left++;//moves pointer
+        }
 
         while (strlen(wordsLength[right]) > pivot )
-            right--;
+        {
+            right--;//moves pointer
+        }
 
         if (strlen(wordsLength[left]) == strlen(wordsLength[right]))
-            left++;
+        {
+            left++;//will increase pointer by one
+        }
 
         else if ( left < right )
         {
-            char* temp = wordsLength[left];
+            swap(wordsLength[left], wordsLength[right]);
+
+            //this runs slower
+            /*char* temp = wordsLength[left];
             wordsLength[left] = wordsLength[right];
-            wordsLength[right] = temp;
+            wordsLength[right] = temp;*/
         }
     }
 
@@ -188,33 +191,40 @@ void SortingCompetition::quickSortAlpha(char**& wordsAlpha, int left, int right)
 //partition for alphabetical quickSort
 int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
 {
-    //char * pivot = medianof5alpha(wordsAlpha, left, right);
-    //cout << pivot;
-    //cout << pivot << endl;
-    //will have to change pivot to &pivot in all strcmp
-    char* pivot = wordsAlpha[right];
+    //median pivot function calls
+    char* pivot = medianof5alpha(wordsAlpha, left, right);
+    //char* pivot = findMedianAlpha(wordsAlpha, left, right);
+
+    //pivot is now just the last element
+    //char* pivot = wordsAlpha[right];
 
     while ( left < right )
     {
         //while (wordsAlpha[left] < pivot )
-        while(strcmp(wordsAlpha[left], pivot) <= -1)
         //while(wordsAlpha[left][0] < pivot)
+        while(strcmp(wordsAlpha[left], pivot) <= -1)
+        {
             left++;
+        }
 
-        //while ( wordsAlpha[right] > pivot )
-        while(strcmp(wordsAlpha[right], pivot) >= 1)
+        //while (wordsAlpha[right] > pivot)
         //while(wordsAlpha[right][0] > pivot)
+        while(strcmp(wordsAlpha[right], pivot) >= 1)
+        {
             right--;
+        }
 
         //if ( strlen(wordsAlpha[left] == strlen(wordsAlpha[right]) )
-        if(strcmp(wordsAlpha[left], wordsAlpha[right]) == 0) {
+        if(strcmp(wordsAlpha[left], wordsAlpha[right]) == 0)
+        {
             left++;
         }
         else if ( left < right )
         {
-            char* temp = wordsAlpha[left];
+            swap(wordsAlpha[left], wordsAlpha[right]);
+            /*char* temp = wordsAlpha[left];
             wordsAlpha[left] = wordsAlpha[right];
-            wordsAlpha[right] = temp;
+            wordsAlpha[right] = temp;*/
         }
     }
 
@@ -222,46 +232,10 @@ int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
 
 }
 
-/*int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
-{
-    char pivot = medianof5alpha(wordsAlpha, left, right);
-    //will have to change pivot to &pivot in all strcmp
-
-    while(left < right)
-    {
-        while(strcmp(wordsAlpha[left], &pivot) <= -1)
-        {
-            left++;
-        }
-
-        while(strcmp(wordsAlpha[right], &pivot) >= 1)
-        {
-            right--;
-        }
-
-        if(strcmp(wordsAlpha[left], wordsAlpha[right]) == 0)
-        {
-                left++;
-        }
-
-        //When I run the debugger the only that ever goes into temp is 'a'
-        else if (left < right)
-        {
-            char* temp = wordsAlpha[left];
-            wordsAlpha[left] = wordsAlpha[right];
-            wordsAlpha[right] = temp;
-        }
-    }
-
-    return right;
-
-}*/
-
-
 void SortingCompetition::lengthAlpha2(char **& wordsLength)
 {
 
-    cout << "ENTERING lengthAlpha" << endl;
+    //cout << "ENTERING lengthAlpha" << endl;
 
     int longestWord = strlen(wordsLength[counter - 1]);
     int startIndex = 0;
@@ -273,8 +247,7 @@ void SortingCompetition::lengthAlpha2(char **& wordsLength)
     { //iterates for each size of word
 
         x = startIndex;
-        //cout << startIndex << endl;
-        lengthCount = 0;
+        lengthCount = 0;//must make this zero for each loop so we add how many words of a certain length there are
 
         while(true)
         {
@@ -282,7 +255,8 @@ void SortingCompetition::lengthAlpha2(char **& wordsLength)
             {
                 break;
             }
-            else {
+            else
+            {
                 lengthCount++;
                 x++;
                 endIndex++;
@@ -291,27 +265,28 @@ void SortingCompetition::lengthAlpha2(char **& wordsLength)
 
         x = startIndex;
         char ** temp = new char*[lengthCount];
+
         for(int j = 0; j < lengthCount; j++)
         {
             temp[j] = wordsLength[x];
             x++;
         }
-        quickSortAlpha(temp, 0, lengthCount -1);
 
+        //pass temp into alpha sort
+        quickSortAlpha(temp, 0, lengthCount -1);
         x = startIndex;
+
+        //place the sorted temp array back into correct elements in array
         for(int j = 0; j < lengthCount; j++)
         {
             wordsLength[x] = temp[j];
             x++;
         }
+
         startIndex = endIndex;
-        //I changed this from endIndex-1 to endIndex, it seemed to work a bit better
-        //but still has problems
 
         delete [] temp;
 
-        //this ends the for loop and without it, it gets stuck in an infinite loop
-        //or something like that
         if(strlen(wordsLength[endIndex]) == longestWord)
         {
             break;
@@ -332,22 +307,25 @@ int SortingCompetition::medianof5(char** words, int left, int right)
 
 char* SortingCompetition::medianof5alpha(char** words, int left, int right)
 {
-    char * median = new char[1];
-    char med = '0';
+    int median = 0;
+    int m = 0;
     int mid = (left + right)/2;
     int leftmid = (left + mid)/2;
     int rightmid = (mid + right)/2;
-    int l = words[left][0];
+    /*int l = words[left][0];
     int lm = words[leftmid][0];
     int m = words[mid][0];
     int rm = words[rightmid][0];
-    int r = words[right][0];
+    int r = words[right][0];*/
 
-    m = (l + lm + m + rm + r)/5;
-    med = (char)m;
-    median[0] = med;
+    m = (left + leftmid + mid + rightmid + right)/5;
+    median = m;
 
-    return median;
+    char* medianTemp = new char[m];
+    medianTemp = words[m];
+
+    return medianTemp;
+
 }
 
 int SortingCompetition::findMedianLength(char** words, int left, int right)
@@ -359,17 +337,22 @@ int SortingCompetition::findMedianLength(char** words, int left, int right)
 }
 
 //finds median by comparing leading chars by using median of three
-char SortingCompetition::findMedianAlpha(char ** words, int left, int right)
+char* SortingCompetition::findMedianAlpha(char ** words, int left, int right)
 {
-    char median = '0';
+    int m = 0;
+    int median = 0;
     int mid = (left + right)/2;
-    int l = words[left][0];
+    /*int l = words[left][0];
     int r = words[right][0];
-    int m = words[mid][0];
-    m = (l + r + m)/3;
-    median = (char)m;
+    int m = words[mid][0];*/
+    m = (left + right + mid)/3;
+    median = m;
 
-    return median;
+    char* medianTemp = new char[m];
+    medianTemp = words[m];
+
+    //we want to return a char* that contains the word that will act as a pivot
+    return medianTemp;
 }
 
 //http://stackoverflow.com/questions/7559608/median-of-three-values-strategy-
