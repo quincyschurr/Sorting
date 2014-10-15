@@ -186,21 +186,24 @@ void SortingCompetition::quickSortAlpha(char**& wordsAlpha, int left, int right)
     }
 }
 //partition for alphabetical quickSort
-/*int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
+int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
 {
-    //char pivot = medianof5alpha(wordsAlpha, left, right);
+    char * pivot = medianof5alpha(wordsAlpha, left, right);
+    cout << pivot;
     //cout << pivot << endl;
     //will have to change pivot to &pivot in all strcmp
-    char* pivot = wordsAlpha[right];
+    //char* pivot = wordsAlpha[right];
 
     while ( left < right )
     {
         //while (wordsAlpha[left] < pivot )
+        cout << "<" << strcmp(wordsAlpha[left], pivot) << endl;
         while(strcmp(wordsAlpha[left], pivot) <= -1)
         //while(wordsAlpha[left][0] < pivot)
             left++;
 
         //while ( wordsAlpha[right] > pivot )
+        cout << ">" << strcmp(wordsAlpha[right], pivot) << endl;
         while(strcmp(wordsAlpha[right], pivot) >= 1)
         //while(wordsAlpha[right][0] > pivot)
             right--;
@@ -219,9 +222,9 @@ void SortingCompetition::quickSortAlpha(char**& wordsAlpha, int left, int right)
 
     return right;
 
-}*/
+}
 
-int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
+/*int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
 {
     char pivot = medianof5alpha(wordsAlpha, left, right);
     //will have to change pivot to &pivot in all strcmp
@@ -254,7 +257,7 @@ int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
 
     return right;
 
-}
+}*/
 
 
 void SortingCompetition::lengthAlpha2(char **& wordsLength)
@@ -270,7 +273,7 @@ void SortingCompetition::lengthAlpha2(char **& wordsLength)
     { //iterates for each size of word
 
         x = startIndex;
-        cout << startIndex << endl;
+        //cout << startIndex << endl;
         lengthCount = 0;
 
         while(true)
@@ -327,9 +330,10 @@ int SortingCompetition::medianof5(char** words, int left, int right)
     return median;
 }
 
-char SortingCompetition::medianof5alpha(char** words, int left, int right)
+char* SortingCompetition::medianof5alpha(char** words, int left, int right)
 {
-    char median = '0';
+    char * median = new char[1];
+    char med = '0';
     int mid = (left + right)/2;
     int leftmid = (left + mid)/2;
     int rightmid = (mid + right)/2;
@@ -340,7 +344,8 @@ char SortingCompetition::medianof5alpha(char** words, int left, int right)
     int r = words[right][0];
 
     m = (l + lm + m + rm + r)/5;
-    median = (char)m;
+    med = (char)m;
+    median[0] = med;
 
     return median;
 }

@@ -35,7 +35,7 @@ private:
     int ThreePivotLength(char**&, int, int);
 
     int medianof5(char**, int, int);
-    char medianof5alpha(char**, int, int);
+    char* medianof5alpha(char**, int, int);
 
     int findMedianLength(char**, int, int);
     char findMedianAlpha(char**, int, int);
