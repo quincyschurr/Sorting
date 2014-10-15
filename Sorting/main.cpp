@@ -16,16 +16,12 @@ int main(int argc, char *argv[])
 {
 
     //check to see if there are enough arguments
-    /*if(argc != 3)
+    if(argc != 3)
     {
         cerr << "There are not enough files to run this program" << endl;
         cerr << "Expected arguments are ./a.out <input file> <output file>" << endl;
         return 1;
-    }*/
-
-    argv[1] = "test.txt";
-    argv[2] = "output.txt";
-
+    }
 
     //declare chrono variables
     chrono::time_point<chrono::system_clock> start, end;

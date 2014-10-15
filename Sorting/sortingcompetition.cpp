@@ -188,22 +188,20 @@ void SortingCompetition::quickSortAlpha(char**& wordsAlpha, int left, int right)
 //partition for alphabetical quickSort
 int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
 {
-    char * pivot = medianof5alpha(wordsAlpha, left, right);
-    cout << pivot;
+    //char * pivot = medianof5alpha(wordsAlpha, left, right);
+    //cout << pivot;
     //cout << pivot << endl;
     //will have to change pivot to &pivot in all strcmp
-    //char* pivot = wordsAlpha[right];
+    char* pivot = wordsAlpha[right];
 
     while ( left < right )
     {
         //while (wordsAlpha[left] < pivot )
-        cout << "<" << strcmp(wordsAlpha[left], pivot) << endl;
         while(strcmp(wordsAlpha[left], pivot) <= -1)
         //while(wordsAlpha[left][0] < pivot)
             left++;
 
         //while ( wordsAlpha[right] > pivot )
-        cout << ">" << strcmp(wordsAlpha[right], pivot) << endl;
         while(strcmp(wordsAlpha[right], pivot) >= 1)
         //while(wordsAlpha[right][0] > pivot)
             right--;
@@ -262,6 +260,8 @@ int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
 
 void SortingCompetition::lengthAlpha2(char **& wordsLength)
 {
+
+    cout << "ENTERING lengthAlpha" << endl;
 
     int longestWord = strlen(wordsLength[counter - 1]);
     int startIndex = 0;
