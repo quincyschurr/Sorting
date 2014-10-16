@@ -239,7 +239,7 @@ int SortingCompetition::partitionAlpha(char**& wordsAlpha, int left, int right)
 void SortingCompetition::lengthAlpha2(char **& wordsLength)
 {
 
-    cout << "ENTERING lengthAlpha" << endl;
+    //cout << "ENTERING lengthAlpha" << endl;
 
     int longestWord = strlen(wordsLength[counter - 1]);
     int startIndex = 0;
