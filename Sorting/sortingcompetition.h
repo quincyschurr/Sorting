@@ -26,11 +26,9 @@ private:
     vector <char*> wordsVector; //to store words as we read them in
     char ** words; //translate vector into char**
     char** wordsLength; //copy of words to use for sort
+    char** temp;
     string input;//text file argument
     int counter;//for number of words
-
-    void quickSortTest(char**&, int, int);
-    int ThreePivotLength(char**&, int, int);
 
     int medianof5(char**, int, int);
     char* medianof5alpha(char**, int, int);
@@ -38,10 +36,10 @@ private:
     int findMedianLength(char**, int, int);
     char* findMedianAlpha(char**, int, int);
 
-    void merge(char **, int, int, int, int); //maybe pass by reference
-    void mergesort(char **, int, int, int); //maybe pass by reference
-    void mergeAlpha(char **, int, int, int, int); //maybe pass by reference
-    void mergesortAlpha(char **, int, int, int); //maybe pass by reference
+    void merge(char**&, int, int, int); //maybe pass by reference
+    void mergesort(char**&, int, int); //maybe pass by reference
+    void mergeAlpha(char**&, int, int, int); //maybe pass by reference
+    void mergesortAlpha(char**&, int, int); //maybe pass by reference
 
     //these functions all work with first element pivot
     string getFileName();
