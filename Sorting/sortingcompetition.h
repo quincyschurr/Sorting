@@ -38,10 +38,10 @@ private:
     int findMedianLength(char**, int, int);
     char* findMedianAlpha(char**, int, int);
 
-    void merge(char ** , int, int, int, int); //maybe pass by reference
-    void mergesort(char ** , int, int, int); //maybe pass by reference
-    void mergeAlpha(char ** , int, int, int, int); //maybe pass by reference
-    void mergesortAlpha(char ** , int, int, int); //maybe pass by reference
+    void merge(char **, int, int, int, int); //maybe pass by reference
+    void mergesort(char **, int, int, int); //maybe pass by reference
+    void mergeAlpha(char **, int, int, int, int); //maybe pass by reference
+    void mergesortAlpha(char **, int, int, int); //maybe pass by reference
 
     //these functions all work with first element pivot
     string getFileName();
