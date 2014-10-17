@@ -45,6 +45,8 @@ void SortingCompetition::outputData(const string& outputFileName)
     delete[] words;
     delete [] temp;
     delete[] wordsLength;
+    delete [] lengths;
+    delete [] tempL;
 
     fout.close();
 }
@@ -56,6 +58,8 @@ bool SortingCompetition::prepareData()
 
     temp = new char*[counter];
     wordsLength = new char*[counter];
+    lengths = new int[counter];
+    tempL = new int[counter];
 
     cout << "This is executing in prepareData " << endl;
 
@@ -63,6 +67,12 @@ bool SortingCompetition::prepareData()
     for(int j = 0; j < counter; j++)
     {
         wordsLength[j] = words[j];
+    }
+
+    //filling array with string lengths of each word
+    for(int i = 0; i < counter; i++)
+    {
+        lengths[i] = strlen(words[i]);
     }
 
     return true;
@@ -121,15 +131,13 @@ void SortingCompetition::sortData()
     int left = 0;
     int right = counter - 1;
 
-    mergesort(wordsLength, left, right);
-    //quickSortLength(wordsLength, left, right);
+    //mergesort(wordsLength, left, right);
+    mergesort(wordsLength, lengths, left, right); //fastest one
+    //quickSortLength(wordsLength, lengths, left, right);
     //quickSortTest(wordsCopy, left, right);
     lengthAlpha2(wordsLength);
 
 }
-
-
-
 
 
 //quick sort with integers
@@ -150,7 +158,8 @@ int SortingCompetition::partitionLength(char**& wordsLength, int left, int right
 {
 
     //int pivot = findMedianLength(wordsLength, left, right);//with median of 3 pivot
-    int pivot = medianof5(wordsLength, left, right); //median of 5 pivot
+    //int pivot = medianof5(wordsLength, left, right); //median of 5 pivot
+    int pivot = strlen(wordsLength[right]);
 
     while ( left < right )
     {
@@ -298,12 +307,12 @@ void SortingCompetition::lengthAlpha2(char**& wordsLength)
     }
 }
 
-int SortingCompetition::medianof5(char** words, int left, int right)
+int SortingCompetition::medianof5(int * lengths, int left, int right)
 {
     int mid = (left + right)/2;
     int leftmid = (left + mid)/2;
     int rightmid = (mid + right)/2;
-    int median = strlen(words[left]) + strlen(words[leftmid]) + strlen(words[mid]) + strlen(words[rightmid]) + strlen(words[right]);
+    int median = lengths[left] + lengths[leftmid] + lengths[mid] + lengths[rightmid] + lengths[right];
     median = median/5;
     return median;
 }
@@ -466,6 +475,116 @@ void SortingCompetition::mergeAlpha(char**& words, int left, int right, int mid)
     {
         words[i] = temp[i];
     }
+}
+
+void SortingCompetition::mergesort(char**& words, int * &lengths, int left, int right)
+{
+    int mid;
+    if (left < right)
+    {
+        mid=(left + right)/2;
+        mergesort(words, lengths, left, mid);
+        mergesort(words, lengths, mid+1, right);
+        merge(words, lengths, left, right, mid);
+    }
+    return;
+}
+
+void SortingCompetition::merge(char**& words, int * &lengths, int left, int right, int mid)
+{
+    //char** temp = new char*[cap];
+    int i = left;
+    int k = left;
+    int j = mid + 1;
+
+    while (i <= mid && j <= right)
+    {
+        //if (strlen(words[i]) < strlen(words[j]))
+        if(lengths[i] < lengths[j])
+        {
+            temp[k] = words[i];
+            tempL[k] = lengths[i];
+            k++;
+            i++;
+        }
+        else
+        {
+            temp[k] = words[j];
+            tempL[k] = lengths[j];
+            k++;
+            j++;
+        }
+    }
+    while (i <= mid)
+    {
+        temp[k] = words[i];
+        tempL[k] = lengths[i];
+        k++;
+        i++;
+    }
+    while (j <= right)
+    {
+        temp[k] = words[j];
+        tempL[k] = lengths[j];
+        k++;
+        j++;
+    }
+    for (i = left; i < k; i++)
+    {
+        words[i] = temp[i];
+        lengths[i] = tempL[i];
+    }
+}
+
+void SortingCompetition::quickSortLength(char**& wordsLength, int * &lengths, int left, int right)
+{
+    //calls quickSortLength recursively to sort by length
+    if ( left < right )
+    {
+        int mid = 0;
+        mid = partitionLength(wordsLength, lengths, left, right);
+        quickSortLength(wordsLength, lengths, left, mid-1);
+        quickSortLength(wordsLength, lengths, mid+1, right);
+    }
+}
+
+//partition for interger quickSort
+int SortingCompetition::partitionLength(char**& wordsLength, int * &lengths, int left, int right)
+{
+
+    //int pivot = findMedianLength(wordsLength, left, right);//with median of 3 pivot
+    int pivot = medianof5(lengths, left, right); //median of 5 pivot
+
+    while ( left < right )
+    {
+        while (lengths[left] < pivot )
+        {
+            left++;//moves pointer
+        }
+
+        while (lengths[right] > pivot )
+        {
+            right--;//moves pointer
+        }
+
+        if (lengths[left] == lengths[right])
+        {
+            left++;//will increase pointer by one
+        }
+
+        else if ( left < right )
+        {
+            swap(wordsLength[left], wordsLength[right]);
+            swap(lengths[left], lengths[right]);
+
+            //this runs slower
+            /*char* temp = wordsLength[left];
+            wordsLength[left] = wordsLength[right];
+            wordsLength[right] = temp;*/
+        }
+    }
+
+    return right;
 }
 
 
