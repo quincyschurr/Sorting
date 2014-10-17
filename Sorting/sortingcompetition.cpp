@@ -26,7 +26,6 @@ void SortingCompetition::outputData(const string& outputFileName)
 {
     ofstream fout("output.txt", ios::out);
 
-    cout << "WE ARE GETTING TO THE OUTPUT METHOD" << endl;
 
     fout << "*****STARTING OUTPUT*****" << endl;
 
@@ -61,7 +60,6 @@ bool SortingCompetition::prepareData()
     lengths = new int[counter];
     tempL = new int[counter];
 
-    cout << "This is executing in prepareData " << endl;
 
     //copying values into the copy arrays
     for(int j = 0; j < counter; j++)
@@ -80,7 +78,6 @@ bool SortingCompetition::prepareData()
 
 bool SortingCompetition::readData()
 {
-    cout << "This is the beginning of readData" << endl;
 
     string temporary;
     char* buffer;
@@ -113,7 +110,6 @@ bool SortingCompetition::readData()
         words[i] = wordsVector[i];
     }
 
-    cout << "This is the end of readData" <<endl;
     fin.close();
     return true;
 }
@@ -125,7 +121,6 @@ void SortingCompetition::setFileName(const string& inputFileName)
 
 void SortingCompetition::sortData()
 {
-    cout << "This is executing in sortData" << endl;
 
     //left is the first element of array and right is the final element
     int left = 0;
