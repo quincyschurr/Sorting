@@ -366,7 +366,7 @@ char* SortingCompetition::findMedianAlpha(char ** words, int left, int right)
 
 //void SortingCompetition::mergesort(char**& words, int left, int right, int cap, bool(*comparisonFunction)(char*, char*));
 
-void SortingCompetition::mergesort(char**& words, int left, int right)
+/*void SortingCompetition::mergesort(char**& words, int left, int right)
 {
     int mid;
     if (left < right)
@@ -377,7 +377,7 @@ void SortingCompetition::mergesort(char**& words, int left, int right)
         merge(words, left, right, mid);
     }
     return;
-}
+}*/
 
 void SortingCompetition::merge(char**& words, int left, int right, int mid)
 {
