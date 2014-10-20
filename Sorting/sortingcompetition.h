@@ -29,34 +29,19 @@ private:
     char** wordsLength; //copy of words to use for sort
     char** temp;
     int * tempL; //temp lengths
-    int * lengths;
+    int * lengths; //holds lengths of each char*
     string input;//text file argument
     int counter;//for number of words
 
-    int medianof5(int*, int, int);
-    char* medianof5alpha(char**, int, int);
+    void mergeAlpha(char**&, int, int, int);
+    void mergesortAlpha(char**&, int, int);
 
-    int findMedianLength(char**, int, int);
-    char* findMedianAlpha(char**, int, int);
-
-    void merge(char**&, int, int, int); //maybe pass by reference
-    void mergesort(char**&, int, int); //maybe pass by reference
-    void mergeAlpha(char**&, int, int, int); //maybe pass by reference
-    void mergesortAlpha(char**&, int, int); //maybe pass by reference
-
-    void merge(char**&, int*&, int, int, int); //maybe pass by reference
-    void mergesort(char**&, int*&, int, int); //maybe pass by reference
+    void merge(char**&, int*&, int, int, int);
+    void mergesort(char**&, int*&, int, int);
 
     //these functions all work with first element pivot
     string getFileName();
     void lengthAlpha2(char**&);
-    void quickSortLength(char**&, int, int);
-    void quickSortAlpha(char**&, int, int);
-    int partitionAlpha(char**&, int, int);
-    int partitionLength(char**&, int, int);
-
-    void quickSortLength(char**&, int*&, int, int);
-    int partitionLength(char**&, int*&, int, int);
 
 
 public:
