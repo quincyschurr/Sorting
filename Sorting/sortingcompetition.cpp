@@ -154,6 +154,7 @@ void SortingCompetition::lengthAlpha2(char**& wordsLength)
             {
                 break;
             }
+
             else //iterates counters
             {
                 lengthCount++;
