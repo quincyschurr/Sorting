@@ -28,8 +28,8 @@ private:
     char ** words; //translate vector into char**
     char** wordsLength; //copy of words to use for sort
     char** temp;
-    int * tempL; //temp lengths
-    int * lengths; //holds lengths of each char*
+    int* tempL; //temp lengths
+    int* lengths; //holds lengths of each char*
     string input;//text file argument
     int counter;//for number of words
 
